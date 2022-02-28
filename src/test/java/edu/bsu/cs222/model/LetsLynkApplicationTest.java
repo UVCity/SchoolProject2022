@@ -10,7 +10,7 @@ public class LetsLynkApplicationTest {
     @Test
     public void addressFormatTest() throws IOException {
         UserInputReader userInput = new UserInputReader();
-        String address =  userInput.formatAddress("123 Elm St.", "47306", "IN", "Muncie");
+        String address =  userInput.formatAddress();
         Assertions.assertEquals("123 Elm St. Muncie, IN 47306",address);
     }
 }
