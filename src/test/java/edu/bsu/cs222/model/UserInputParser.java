@@ -24,4 +24,18 @@ public class UserInputParser {
         return name.get(0).toString();
     }
 
+    public String parseHoursOfOperation (InputStream testDataStream) throws IOException {
+        JSONArray openValue = JsonPath.read(testDataStream, "$..open_now");
+        return openValue.get(0).toString();
+    }
+
+    public String parseLongitude (InputStream testDataStream) throws IOException {
+        JSONArray longitude = JsonPath.read(testDataStream, "$..location.lng");
+        return longitude.get(0).toString();
+    }
+
+    public String parseLattitude (InputStream testDataStream) throws IOException {
+        JSONArray lattitude = JsonPath.read(testDataStream, "$..location.lat");
+        return lattitude.get(0).toString();
+    }
 }
