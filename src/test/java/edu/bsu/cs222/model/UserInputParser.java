@@ -5,11 +5,6 @@ import net.minidev.json.JSONArray;
 
 import java.io.InputStream;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
-import java.nio.charset.Charset;
 
 public class UserInputParser {
 
