@@ -29,8 +29,8 @@ public class UserInputParser {
         return longitude.get(0).toString();
     }
 
-    public String parseLattitude (InputStream testDataStream) throws IOException {
-        JSONArray lattitude = JsonPath.read(testDataStream, "$..location.lat");
-        return lattitude.get(0).toString();
+    public String parseLatitude (InputStream testDataStream) throws IOException {
+        JSONArray latitude = JsonPath.read(testDataStream, "$..location.lat");
+        return latitude.get(0).toString();
     }
 }

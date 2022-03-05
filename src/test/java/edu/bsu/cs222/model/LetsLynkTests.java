@@ -8,7 +8,7 @@ import java.io.InputStream;
 
 public class LetsLynkTests {
 
-    public final InputStream testDataStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("test.json");
+    public final InputStream testDataStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("PlaceNearBySearchData.json");
     public final UserInputParser parser = new UserInputParser();
 
 
@@ -37,8 +37,8 @@ public class LetsLynkTests {
     }
 
     @Test
-    public void ParseLattitudeTest() throws IOException {
-        String lattitude = parser.parseLattitude(testDataStream);
-        Assertions.assertEquals("40.197237", lattitude);
+    public void ParseLatitudeTest() throws IOException {
+        String latitude = parser.parseLatitude(testDataStream);
+        Assertions.assertEquals("40.197237", latitude);
     }
 }
