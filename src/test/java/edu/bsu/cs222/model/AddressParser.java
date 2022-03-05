@@ -6,7 +6,7 @@ import net.minidev.json.JSONArray;
 import java.io.InputStream;
 import java.io.IOException;
 
-public class UserInputParser {
+public class AddressParser {
 
     public String parseAddress (InputStream testDataStream) throws IOException {
         JSONArray address = JsonPath.read(testDataStream, "$..formatted_address");

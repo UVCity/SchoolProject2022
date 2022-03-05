@@ -9,7 +9,7 @@ import java.io.InputStream;
 public class LetsLynkTests {
 
     public final InputStream testDataStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("PlaceNearBySearchData.json");
-    public final UserInputParser parser = new UserInputParser();
+    public final AddressParser parser = new AddressParser();
 
 
     @Test
@@ -33,7 +33,7 @@ public class LetsLynkTests {
     @Test
     public void ParseLongitudeTest() throws IOException {
         String longitude = parser.parseLongitude(testDataStream);
-        Assertions.assertEquals("-85.408903",longitude);
+        Assertions.assertEquals("-85.419575",longitude);
     }
 
     @Test
