@@ -8,37 +8,56 @@ import java.io.InputStream;
 
 public class LetsLynkTests {
 
-    public final InputStream testDataStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("PlaceNearBySearchData.json");
+    public final InputStream placeNearByStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("PlaceNearBySearchData.json");
+    public final InputStream placeFromTextStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("FindPlaceFromTextData.json");
     public final AddressParser parser = new AddressParser();
 
 
     @Test
-    public void ParseAddressTest() throws IOException {
-        String address = parser.parseAddress(testDataStream);
-        Assertions.assertEquals("2000 W University Ave, Muncie, IN 47306, United States",address);
+    public void ParseUserAddressTest() throws IOException {
+        String address = parser.parseUserAddress(placeFromTextStream);
+        Assertions.assertEquals("2720 W Jackson St, Muncie, IN 47303, USA",address);
     }
 
     @Test
-    public void ParseNameTest() throws IOException {
-        String name = parser.parseName(testDataStream);
+    public void ParseUserLongitude() throws IOException {
+        String longitude = parser.parseLongitude(placeFromTextStream);
+        Assertions.assertEquals("-85.4186142",longitude);
+    }
+
+    @Test
+    public void ParseUserLatititudeTest() throws IOException {
+        String latitude = parser.parseLatitude(placeFromTextStream);
+        Assertions.assertEquals("40.1934735", latitude);
+    }
+
+    @Test
+    public void ParseVenueAddressTest() throws IOException {
+        String address = parser.parseVenueAddress(placeNearByStream);
+        Assertions.assertEquals("523 South Tillotson Avenue, Muncie",address);
+    }
+
+    @Test
+    public void ParseVenueNameTest() throws IOException {
+        String name = parser.parseName(placeNearByStream);
         Assertions.assertEquals("Starbucks",name);
     }
 
     @Test
-    public void ParseHoursOfOperationTest() throws IOException {
-        String openValue = parser.parseHoursOfOperation(testDataStream);
-        Assertions.assertEquals("false", openValue);
+    public void ParseVenueHoursOfOperationTest() throws IOException {
+        String openValue = parser.parseHoursOfOperation(placeNearByStream);
+        Assertions.assertEquals("true", openValue);
     }
 
     @Test
-    public void ParseLongitudeTest() throws IOException {
-        String longitude = parser.parseLongitude(testDataStream);
+    public void ParseVenueLongitudeTest() throws IOException {
+        String longitude = parser.parseLongitude(placeNearByStream);
         Assertions.assertEquals("-85.419575",longitude);
     }
 
     @Test
-    public void ParseLatitudeTest() throws IOException {
-        String latitude = parser.parseLatitude(testDataStream);
-        Assertions.assertEquals("40.197237", latitude);
+    public void ParseVenueLatitudeTest() throws IOException {
+        String latitude = parser.parseLatitude(placeNearByStream);
+        Assertions.assertEquals("40.189823", latitude);
     }
 }

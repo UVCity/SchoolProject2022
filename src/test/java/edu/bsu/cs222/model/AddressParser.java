@@ -8,11 +8,15 @@ import java.io.IOException;
 
 public class AddressParser {
 
-    public String parseAddress (InputStream testDataStream) throws IOException {
-        JSONArray address = JsonPath.read(testDataStream, "$..formatted_address");
+    public String parseVenueAddress(InputStream testDataStream) throws IOException {
+        JSONArray address = JsonPath.read(testDataStream, "$..vicinity");
         return address.get(0).toString();
     }
 
+    public String parseUserAddress(InputStream testDataStream) throws IOException {
+        JSONArray address = JsonPath.read(testDataStream, "$..formatted_address");
+        return address.get(0).toString();
+    }
 
     public String parseName (InputStream testDataStream) throws IOException {
         JSONArray name = JsonPath.read(testDataStream, "$..name");
