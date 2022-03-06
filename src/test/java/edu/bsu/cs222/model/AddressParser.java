@@ -5,11 +5,40 @@ import net.minidev.json.JSONArray;
 
 import java.io.InputStream;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
+import java.nio.charset.Charset;
 
 public class AddressParser {
 
+    private InputStream PlaceNearSearch(Double latitude, Double longitude) throws IOException {
+        //String encodedUrlString = URLEn coder.encode(articleTitle, Charset.defaultCharset());
+        String format = "%2C";
+        String formatter = String.format("%f%s%f",latitude,format, longitude);
+        String urlString = String.format("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%s&rankby=distance&type=restaurant&formatted_address&key=AIzaSyBGWTbodP6UEglrxhuu02vh9_VwxL17mfE",formatter );
+        try {
+            URL url = new URL(urlString);
+            URLConnection connection = url.openConnection();
+            connection.setRequestProperty("User-Agent",
+                    "Revision Reporter/0.1 (http://www.cs.bsu.edu/~pvg/courses/cs222Sp22; lyle@uv.city)");
+            return connection.getInputStream();
+        }
+        catch (MalformedURLException malformedURLException){
+            throw new RuntimeException(malformedURLException);
+        }
+    }
+
     public String parseVenueAddress(InputStream testDataStream) throws IOException {
         JSONArray address = JsonPath.read(testDataStream, "$..vicinity");
+        return address.get(0).toString();
+    }
+
+    public String parseVenueAddressURL() throws IOException {
+        Double lon = -85.41954619473654;
+        Double lat = 40.189830747820935;
+        JSONArray address = JsonPath.read(PlaceNearSearch(lat, lon), "$..vicinity");
         return address.get(0).toString();
     }
 

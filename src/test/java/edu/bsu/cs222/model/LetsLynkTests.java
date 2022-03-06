@@ -12,11 +12,16 @@ public class LetsLynkTests {
     public final InputStream placeFromTextStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("FindPlaceFromTextData.json");
     public final AddressParser parser = new AddressParser();
 
-
     @Test
     public void ParseUserAddressTest() throws IOException {
         String address = parser.parseUserAddress(placeFromTextStream);
         Assertions.assertEquals("2720 W Jackson St, Muncie, IN 47303, USA",address);
+    }
+
+    @Test
+    public void ParseUserAddressFromURLTest() throws IOException {
+        String address = parser.parseVenueAddressURL();
+        Assertions.assertEquals("523 South Tillotson Avenue, Muncie",address);
     }
 
     @Test
@@ -26,7 +31,7 @@ public class LetsLynkTests {
     }
 
     @Test
-    public void ParseUserLatititudeTest() throws IOException {
+    public void ParseUserLatitudeTest() throws IOException {
         String latitude = parser.parseLatitude(placeFromTextStream);
         Assertions.assertEquals("40.1934735", latitude);
     }
