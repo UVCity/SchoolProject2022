@@ -23,6 +23,11 @@ public class LetsLynkTests {
         String address = parser.parseVenueAddressURL();
         Assertions.assertEquals("523 South Tillotson Avenue, Muncie",address);
     }
+    @Test
+    public void ParseUserAddressURLTest() throws IOException {
+        String address = parser.parseUserAddress();
+        Assertions.assertEquals("2720 W Jackson St, Muncie, IN 47303, USA",address);
+    }
 
     @Test
     public void ParseUserLongitude() throws IOException {
