@@ -45,19 +45,20 @@ public class AddressParser {
         }
     }
 //______________________________________________________________________________________________________________________
-    //public String returnAverageLattitde( InputStream userone , InputStream usertwo) throws IOException {
-    //    int AverageLa = parseLatitude(userone());
-    //}
+    public Double returnAverageLatitude( InputStream userOneAddress , InputStream userTwoAddress) throws IOException {
+        return (Double.parseDouble(parseLatitude(userOneAddress)) + Double.parseDouble(parseLatitude(userTwoAddress))/2);
+    }
+    public Double returnAverageLongitude( InputStream userOneAddress , InputStream userTwoAddress) throws IOException {
+        return (Double.parseDouble(parseLongitude(userOneAddress)) + Double.parseDouble(parseLongitude(userTwoAddress))/2);
+    }
 
     public String parseVenueAddress(InputStream testDataStream) throws IOException {
         JSONArray address = JsonPath.read(testDataStream, "$..vicinity");
         return address.get(0).toString();
     }
 
-    public String parseVenueAddressURL() throws IOException {
-        Double lon = -85.41954619473654;
-        Double lat = 40.189830747820935;
-        JSONArray address = JsonPath.read(PlaceNearSearch(lat, lon), "$..vicinity");
+    public String parseVenueAddressURL(Double latitude, Double longitude) throws IOException {
+        JSONArray address = JsonPath.read(PlaceNearSearch(latitude, longitude), "$..vicinity");
         return address.get(0).toString();
     }
 
@@ -65,8 +66,7 @@ public class AddressParser {
         JSONArray address = JsonPath.read(testDataStream, "$..formatted_address");
         return address.get(0).toString();
     }
-    public String parseUserAddress() throws IOException{
-        String input = "2720 West Jackson Street Muncie IN 47304";
+    public String parseUserAddressURL(String input) throws IOException{
         JSONArray address = JsonPath.read(PlaceFromText(input), "$..formatted_address");
         return address.get(0).toString();
     }

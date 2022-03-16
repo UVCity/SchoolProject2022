@@ -20,12 +20,12 @@ public class LetsLynkTests {
 
     @Test
     public void ParseUserAddressFromURLTest() throws IOException {
-        String address = parser.parseVenueAddressURL();
+        String address = parser.parseVenueAddressURL(40.189830747820935, -85.41954619473654);
         Assertions.assertEquals("523 South Tillotson Avenue, Muncie",address);
     }
     @Test
     public void ParseUserAddressURLTest() throws IOException {
-        String address = parser.parseUserAddress();
+        String address = parser.parseUserAddressURL("2720 West Jackson Street Muncie IN 47304");
         Assertions.assertEquals("2720 W Jackson St, Muncie, IN 47303, USA",address);
     }
 
@@ -69,5 +69,10 @@ public class LetsLynkTests {
     public void ParseVenueLatitudeTest() throws IOException {
         String latitude = parser.parseLatitude(placeNearByStream);
         Assertions.assertEquals("40.189823", latitude);
-    }
+    }/*
+    @Test
+    public void ParseUsersAverageLatitudeTest() throws IOException {
+        Double latitude = returnAverageLatitude( UserAddress1, UserAddress2);
+        Assertions.assertEquals(40.189823, latitude);
+    }*/
 }
