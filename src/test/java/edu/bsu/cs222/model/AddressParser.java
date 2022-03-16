@@ -13,7 +13,7 @@ import java.nio.charset.Charset;
 
 public class AddressParser {
 
-    private InputStream PlaceFromText(String address) throws IOException {
+    public InputStream PlaceFromText(String address) throws IOException {
         String encodedUrlString = URLEncoder.encode(address, Charset.defaultCharset());
 
         String urlString = String.format("https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=%s&inputtype=textquery&fields=formatted_address%%2Cgeometry&key=AIzaSyBGWTbodP6UEglrxhuu02vh9_VwxL17mfE",encodedUrlString );
@@ -46,10 +46,10 @@ public class AddressParser {
     }
 //______________________________________________________________________________________________________________________
     public Double returnAverageLatitude( InputStream userOneAddress , InputStream userTwoAddress) throws IOException {
-        return (Double.parseDouble(parseLatitude(userOneAddress)) + Double.parseDouble(parseLatitude(userTwoAddress))/2);
+        return (Double.parseDouble(parseLatitude(userOneAddress)) + Double.parseDouble(parseLatitude(userTwoAddress)))/2;
     }
     public Double returnAverageLongitude( InputStream userOneAddress , InputStream userTwoAddress) throws IOException {
-        return (Double.parseDouble(parseLongitude(userOneAddress)) + Double.parseDouble(parseLongitude(userTwoAddress))/2);
+        return (Double.parseDouble(parseLongitude(userOneAddress)) + Double.parseDouble(parseLongitude(userTwoAddress)))/2;
     }
 
     public String parseVenueAddress(InputStream testDataStream) throws IOException {

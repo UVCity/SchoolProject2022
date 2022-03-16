@@ -69,10 +69,19 @@ public class LetsLynkTests {
     public void ParseVenueLatitudeTest() throws IOException {
         String latitude = parser.parseLatitude(placeNearByStream);
         Assertions.assertEquals("40.189823", latitude);
-    }/*
+    }
     @Test
     public void ParseUsersAverageLatitudeTest() throws IOException {
-        Double latitude = returnAverageLatitude( UserAddress1, UserAddress2);
-        Assertions.assertEquals(40.189823, latitude);
-    }*/
+        InputStream userOneAddress = parser.PlaceFromText("2720 West Jackson Street Muncie IN 47304"); // Ideally these address would be unique
+        InputStream userTwoAddress = parser.PlaceFromText("2720 West Jackson Street Muncie IN 47304");
+        Double latitude = parser.returnAverageLatitude(userOneAddress, userTwoAddress);
+        Assertions.assertEquals(40.1934735, latitude);
+    }
+    @Test
+    public void ParseUsersAverageLongitudeTest() throws IOException {
+        InputStream userOneAddress = parser.PlaceFromText("2720 West Jackson Street Muncie IN 47304"); // Ideally these address would be unique
+        InputStream userTwoAddress = parser.PlaceFromText("2720 West Jackson Street Muncie IN 47304");
+        Double longitude = parser.returnAverageLongitude(userOneAddress, userTwoAddress);
+        Assertions.assertEquals(-85.4186142, longitude);
+    }
 }
