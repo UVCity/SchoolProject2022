@@ -29,10 +29,10 @@ public class AddressParser {
         }
     }
 
-    private InputStream PlaceNearSearch(Double latitude, Double longitude) throws IOException {
+    private InputStream PlaceNearSearch(Double latitude, Double longitude, String venueType) throws IOException {
         String format = "%2C";
         String formatter = String.format("%f%s%f",latitude,format, longitude);
-        String urlString = String.format("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%s&rankby=distance&type=restaurant&formatted_address&key=AIzaSyBGWTbodP6UEglrxhuu02vh9_VwxL17mfE",formatter );
+        String urlString = String.format("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%s&rankby=distance&type=%s&formatted_address&key=AIzaSyBGWTbodP6UEglrxhuu02vh9_VwxL17mfE",formatter, venueType);
         try {
             URL url = new URL(urlString);
             URLConnection connection = url.openConnection();
@@ -57,8 +57,8 @@ public class AddressParser {
         return address.get(0).toString();
     }
 
-    public String parseVenueAddressURL(Double latitude, Double longitude) throws IOException {
-        JSONArray address = JsonPath.read(PlaceNearSearch(latitude, longitude), "$..vicinity");
+    public String parseVenueAddressURL(Double latitude, Double longitude, String venueType) throws IOException {
+        JSONArray address = JsonPath.read(PlaceNearSearch(latitude, longitude, venueType), "$..vicinity");
         return address.get(0).toString();
     }
 

@@ -75,7 +75,7 @@ public class LetsLynkTests {
     }
     @Test
     public void ParseUserAddressFromURLTest() throws IOException {
-        String address = parser.parseVenueAddressURL(40.208118150000004, -85.41264945);
+        String address = parser.parseVenueAddressURL(40.208118150000004, -85.41264945, "restaurant");
         Assertions.assertEquals("Ball State University North Dining 201, 1525 North McKinley Avenue, Muncie", address);
     }
     @Test
