@@ -17,18 +17,6 @@ public class LetsLynkTests {
         String address = parser.parseUserAddress(placeFromTextStream);
         Assertions.assertEquals("2720 W Jackson St, Muncie, IN 47303, USA",address);
     }
-
-    @Test
-    public void ParseUserAddressFromURLTest() throws IOException {
-        String address = parser.parseVenueAddressURL(40.189830747820935, -85.41954619473654);
-        Assertions.assertEquals("523 South Tillotson Avenue, Muncie",address);
-    }
-    @Test
-    public void ParseUserAddressURLTest() throws IOException {
-        String address = parser.parseUserAddressURL("2720 West Jackson Street Muncie IN 47304");
-        Assertions.assertEquals("2720 W Jackson St, Muncie, IN 47303, USA",address);
-    }
-
     @Test
     public void ParseUserLongitude() throws IOException {
         String longitude = parser.parseLongitude(placeFromTextStream);
@@ -70,18 +58,30 @@ public class LetsLynkTests {
         String latitude = parser.parseLatitude(placeNearByStream);
         Assertions.assertEquals("40.189823", latitude);
     }
+    //________________U_R_L___T_E_S_T_I_N_G______________
     @Test
     public void ParseUsersAverageLatitudeTest() throws IOException {
-        InputStream userOneAddress = parser.PlaceFromText("2720 West Jackson Street Muncie IN 47304"); // Ideally these address would be unique
-        InputStream userTwoAddress = parser.PlaceFromText("2720 West Jackson Street Muncie IN 47304");
+        InputStream userOneAddress = parser.PlaceFromText("1615 Riverside Avenue, 47303"); // Ideally these address would be unique
+        InputStream userTwoAddress = parser.PlaceFromText("2800 Tillotson Avenue 47304");
         Double latitude = parser.returnAverageLatitude(userOneAddress, userTwoAddress);
-        Assertions.assertEquals(40.1934735, latitude);
+        Assertions.assertEquals(40.208118150000004, latitude);
     }
     @Test
     public void ParseUsersAverageLongitudeTest() throws IOException {
-        InputStream userOneAddress = parser.PlaceFromText("2720 West Jackson Street Muncie IN 47304"); // Ideally these address would be unique
-        InputStream userTwoAddress = parser.PlaceFromText("2720 West Jackson Street Muncie IN 47304");
+        InputStream userOneAddress = parser.PlaceFromText("1615 Riverside Avenue, 47303"); // Ideally these address would be unique
+        InputStream userTwoAddress = parser.PlaceFromText("2800 Tillotson Avenue 47304");
         Double longitude = parser.returnAverageLongitude(userOneAddress, userTwoAddress);
-        Assertions.assertEquals(-85.4186142, longitude);
+        Assertions.assertEquals(-85.41264945, longitude);
     }
+    @Test
+    public void ParseUserAddressFromURLTest() throws IOException {
+        String address = parser.parseVenueAddressURL(40.208118150000004, -85.41264945);
+        Assertions.assertEquals("Ball State University North Dining 201, 1525 North McKinley Avenue, Muncie", address);
+    }
+    @Test
+    public void ParseUserAddressURLTest() throws IOException {
+        String address = parser.parseUserAddressURL("2720 West Jackson Street Muncie IN 47304");
+        Assertions.assertEquals("2720 W Jackson St, Muncie, IN 47303, USA",address);
+    }
+
 }
