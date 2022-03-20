@@ -1,0 +1,181 @@
+{
+  "geocoded_waypoints" : [
+    {
+      "geocoder_status" : "OK",
+      "place_id" : "ChIJ7VSKcT49FYgRRykE_lYtM5E",
+      "types" : [ "premise" ]
+    },
+    {
+      "geocoder_status" : "OK",
+      "place_id" : "ChIJr49G_Tw9FYgRu_Ip88n_j3Y",
+      "types" : [ "premise" ]
+    }
+  ],
+  "routes" : [
+    {
+      "bounds" : {
+        "northeast" : {
+          "lat" : 40.1932456,
+          "lng" : -85.41838509999999
+        },
+        "southwest" : {
+          "lat" : 40.1897989,
+          "lng" : -85.41935199999999
+        }
+      },
+      "copyrights" : "Map data ©2022",
+      "legs" : [
+        {
+          "distance" : {
+            "text" : "0.3 mi",
+            "value" : 492
+          },
+          "duration" : {
+            "text" : "3 mins",
+            "value" : 171
+          },
+          "end_address" : "523 S Tillotson Ave, Muncie, IN 47304, USA",
+          "end_location" : {
+            "lat" : 40.1897989,
+            "lng" : -85.41935199999999
+          },
+          "start_address" : "2720 W Jackson St, Muncie, IN 47303, USA",
+          "start_location" : {
+            "lat" : 40.1932456,
+            "lng" : -85.41878849999999
+          },
+          "steps" : [
+            {
+              "distance" : {
+                "text" : "108 ft",
+                "value" : 33
+              },
+              "duration" : {
+                "text" : "1 min",
+                "value" : 11
+              },
+              "end_location" : {
+                "lat" : 40.1932003,
+                "lng" : -85.4184125
+              },
+              "html_instructions" : "Head \u003cb\u003eeast\u003c/b\u003e toward \u003cb\u003eW Jackson St\u003c/b\u003e",
+              "polyline" : {
+                "points" : "yfitFljjhO@A@GB]@K?I?C?C?E"
+              },
+              "start_location" : {
+                "lat" : 40.1932456,
+                "lng" : -85.41878849999999
+              },
+              "travel_mode" : "DRIVING"
+            },
+            {
+              "distance" : {
+                "text" : "85 ft",
+                "value" : 26
+              },
+              "duration" : {
+                "text" : "1 min",
+                "value" : 9
+              },
+              "end_location" : {
+                "lat" : 40.1929714,
+                "lng" : -85.41838509999999
+              },
+              "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e toward \u003cb\u003eW Jackson St\u003c/b\u003e",
+              "maneuver" : "turn-right",
+              "polyline" : {
+                "points" : "ofitF`hjhOl@C"
+              },
+              "start_location" : {
+                "lat" : 40.1932003,
+                "lng" : -85.4184125
+              },
+              "travel_mode" : "DRIVING"
+            },
+            {
+              "distance" : {
+                "text" : "217 ft",
+                "value" : 66
+              },
+              "duration" : {
+                "text" : "1 min",
+                "value" : 34
+              },
+              "end_location" : {
+                "lat" : 40.19297600000001,
+                "lng" : -85.4191582
+              },
+              "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e at the 1st cross street onto \u003cb\u003eW Jackson St\u003c/b\u003e",
+              "maneuver" : "turn-right",
+              "polyline" : {
+                "points" : "aeitF|gjhO?XA~B"
+              },
+              "start_location" : {
+                "lat" : 40.1929714,
+                "lng" : -85.41838509999999
+              },
+              "travel_mode" : "DRIVING"
+            },
+            {
+              "distance" : {
+                "text" : "0.2 mi",
+                "value" : 339
+              },
+              "duration" : {
+                "text" : "1 min",
+                "value" : 55
+              },
+              "end_location" : {
+                "lat" : 40.1899236,
+                "lng" : -85.41913649999999
+              },
+              "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e at the 1st cross street onto \u003cb\u003eTillotson Ave\u003c/b\u003e",
+              "maneuver" : "turn-left",
+              "polyline" : {
+                "points" : "ceitFvljhObBAV?J?J?pCAJ?f@?xC?nB?"
+              },
+              "start_location" : {
+                "lat" : 40.19297600000001,
+                "lng" : -85.4191582
+              },
+              "travel_mode" : "DRIVING"
+            },
+            {
+              "distance" : {
+                "text" : "92 ft",
+                "value" : 28
+              },
+              "duration" : {
+                "text" : "1 min",
+                "value" : 62
+              },
+              "end_location" : {
+                "lat" : 40.1897989,
+                "lng" : -85.41935199999999
+              },
+              "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e before Starbucks\u003cdiv style=\"font-size:0.9em\"\u003eDestination will be on the right\u003c/div\u003e",
+              "maneuver" : "turn-right",
+              "polyline" : {
+                "points" : "_rhtFrljhO@b@TD"
+              },
+              "start_location" : {
+                "lat" : 40.1899236,
+                "lng" : -85.41913649999999
+              },
+              "travel_mode" : "DRIVING"
+            }
+          ],
+          "traffic_speed_entry" : [],
+          "via_waypoint" : []
+        }
+      ],
+      "overview_polyline" : {
+        "points" : "yfitFljjhOHs@?Wl@C?XA~BbBAb@?|CA|H?@b@TD"
+      },
+      "summary" : "Tillotson Ave",
+      "warnings" : [],
+      "waypoint_order" : []
+    }
+  ],
+  "status" : "OK"
+}
