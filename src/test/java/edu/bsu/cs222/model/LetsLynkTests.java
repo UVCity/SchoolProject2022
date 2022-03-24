@@ -22,7 +22,6 @@ public class LetsLynkTests {
         String longitude = parser.parseLongitude(placeFromTextStream);
         Assertions.assertEquals("-85.4186142",longitude);
     }
-
     @Test
     public void ParseUserLatitudeTest() throws IOException {
         String latitude = parser.parseLatitude(placeFromTextStream);
