@@ -44,7 +44,22 @@ public class AddressParser {
             throw new RuntimeException(malformedURLException);
         }
     }
-//______________________________________________________________________________________________________________________
+    private InputStream directionsAndDistance( String placeFrom , String placeTo) throws IOException {
+        String from = URLEncoder.encode(placeFrom, Charset.defaultCharset());
+        String to = URLEncoder.encode(placeTo, Charset.defaultCharset());
+        String urlString = String.format("https://maps.googleapis.com/maps/api/directions/json?origin=%s&destination=%s&key=AIzaSyBGWTbodP6UEglrxhuu02vh9_VwxL17mfE" ,from, to);
+        try {
+            URL url = new URL(urlString);
+            URLConnection connection = url.openConnection();
+            connection.setRequestProperty("User-Agent",
+                    "Revision Reporter/0.1 (http://www.cs.bsu.edu/~pvg/courses/cs222Sp22; lyle@uv.city)");
+            return connection.getInputStream();
+        }
+        catch (MalformedURLException malformedURLException){
+            throw new RuntimeException(malformedURLException);
+        }
+    }
+    //______________________________________________________________________________________________________________________
     public Double returnAverageLatitude( InputStream userOneAddress , InputStream userTwoAddress) throws IOException {
         return (Double.parseDouble(parseLatitude(userOneAddress)) + Double.parseDouble(parseLatitude(userTwoAddress)))/2;
     }
