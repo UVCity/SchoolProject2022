@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="edu.bsu.cs222.model.LetsLynkTests" tests="12" skipped="0" failures="0" errors="0" timestamp="2022-03-27T21:45:27" hostname="VICKYSLAPTOP" time="3.606">
+  <properties/>
+  <testcase name="ParseUserLongitude()" classname="edu.bsu.cs222.model.LetsLynkTests" time="0.052"/>
+  <testcase name="ParseVenueNameTest()" classname="edu.bsu.cs222.model.LetsLynkTests" time="0.014"/>
+  <testcase name="ParseUserAddressFromURLTest()" classname="edu.bsu.cs222.model.LetsLynkTests" time="1.178"/>
+  <testcase name="ParseUsersAverageLatitudeTest()" classname="edu.bsu.cs222.model.LetsLynkTests" time="1.393"/>
+  <testcase name="ParseVenueAddressTest()" classname="edu.bsu.cs222.model.LetsLynkTests" time="0.003"/>
+  <testcase name="ParseUserAddressTest()" classname="edu.bsu.cs222.model.LetsLynkTests" time="0.001"/>
+  <testcase name="ParseVenueLatitudeTest()" classname="edu.bsu.cs222.model.LetsLynkTests" time="0.003"/>
+  <testcase name="ParseUserAddressURLTest()" classname="edu.bsu.cs222.model.LetsLynkTests" time="0.581"/>
+  <testcase name="ParseVenueLongitudeTest()" classname="edu.bsu.cs222.model.LetsLynkTests" time="0.003"/>
+  <testcase name="ParseVenueHoursOfOperationTest()" classname="edu.bsu.cs222.model.LetsLynkTests" time="0.003"/>
+  <testcase name="ParseUserLatitudeTest()" classname="edu.bsu.cs222.model.LetsLynkTests" time="0.0"/>
+  <testcase name="ParseUsersAverageLongitudeTest()" classname="edu.bsu.cs222.model.LetsLynkTests" time="0.366"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
