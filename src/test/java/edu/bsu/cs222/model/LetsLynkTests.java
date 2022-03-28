@@ -10,6 +10,7 @@ public class LetsLynkTests {
 
     public final InputStream placeNearByStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("PlaceNearBySearchData.json");
     public final InputStream placeFromTextStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("FindPlaceFromTextData.json");
+    public final InputStream placeDirectionsStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("Directions.json");
     public final AddressParser parser = new AddressParser();
 
     @Test
@@ -56,6 +57,11 @@ public class LetsLynkTests {
     public void ParseVenueLatitudeTest() throws IOException {
         String latitude = parser.parseLatitude(placeNearByStream);
         Assertions.assertEquals("40.189823", latitude);
+    }
+    @Test
+    public void ParseDistance() throws IOException {
+        String distance = parser.parseDistanceToAddress(placeDirectionsStream);
+        Assertions.assertEquals("0.3 mi", distance);
     }
     //________________U_R_L___T_E_S_T_I_N_G______________
     @Test

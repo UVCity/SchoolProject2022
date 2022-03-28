@@ -103,4 +103,8 @@ public class AddressParser {
         JSONArray latitude = JsonPath.read(testDataStream, "$..location.lat");
         return latitude.get(0).toString();
     }
+    public String parseDistanceToAddress(InputStream testDataStream) throws IOException{
+        JSONArray distance = JsonPath.read(testDataStream, "$..distance.text");
+        return distance.get(0).toString();
+    }
 }
