@@ -36,15 +36,15 @@ public class LetsLynkTests {
     //________________U_R_L___T_E_S_T_I_N_G______________
     @Test
     public void ParseUsersAverageLatitudeTest() throws IOException {
-        InputStream userOneAddress = parser.PlaceFromText("1615 Riverside Avenue, 47303"); // Ideally these address would be unique
-        InputStream userTwoAddress = parser.PlaceFromText("2800 Tillotson Avenue 47304");
+        InputStream userOneAddress = parser.placeFromText("1615 Riverside Avenue, 47303"); // Ideally these address would be unique
+        InputStream userTwoAddress = parser.placeFromText("2800 Tillotson Avenue 47304");
         Double latitude = parser.returnAverageLatitude(userOneAddress, userTwoAddress);
         Assertions.assertEquals(40.208118150000004, latitude);
     }
     @Test
     public void ParseUsersAverageLongitudeTest() throws IOException {
-        InputStream userOneAddress = parser.PlaceFromText("1615 Riverside Avenue, 47303"); // Ideally these address would be unique
-        InputStream userTwoAddress = parser.PlaceFromText("2800 Tillotson Avenue 47304");
+        InputStream userOneAddress = parser.placeFromText("1615 Riverside Avenue, 47303"); // Ideally these address would be unique
+        InputStream userTwoAddress = parser.placeFromText("2800 Tillotson Avenue 47304");
         Double longitude = parser.returnAverageLongitude(userOneAddress, userTwoAddress);
         Assertions.assertEquals(-85.41264945, longitude);
     }
