@@ -35,8 +35,8 @@ public class LetsLynkApplication extends Application {
 
     private final Button goButton = new Button("Let's Lynk!");
 
-    private Label checkAddress1 = new Label("Formatted Address Should Appear Here");
-    private Label checkAddress2 = new Label("Formatted Address Should Appear Here");
+    private Label checkAddress1 = new Label("");
+    private Label checkAddress2 = new Label("");
 
     private final Executor executor = Executors.newSingleThreadExecutor();
 
@@ -64,10 +64,6 @@ public class LetsLynkApplication extends Application {
         gridPane.add(city2,2,1);
         gridPane.add(zip1,1,2);
         gridPane.add(zip2,2,2);
-
-
-        gridPane.add(checkAddress1, 1, 3);
-        gridPane.add(checkAddress2, 2, 3);
 
 
         goButton.setOnAction((event) -> {
