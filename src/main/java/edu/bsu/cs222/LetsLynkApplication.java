@@ -13,6 +13,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.io.InputStream;
+
+
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -31,6 +35,10 @@ public class LetsLynkApplication extends Application {
 
     private final Button goButton = new Button("Let's Lynk!");
 
+    private Label checkAddress1 = new Label("");
+    private Label checkAddress2 = new Label("");
+
+    private final Executor executor = Executors.newSingleThreadExecutor();
 
 
     @Override
@@ -57,8 +65,39 @@ public class LetsLynkApplication extends Application {
         gridPane.add(zip1,1,2);
         gridPane.add(zip2,2,2);
 
+
+        goButton.setOnAction((event) -> {
+            goButton.setDisable(true);
+
+            executor.execute(()->{
+                AddressParser parser1 = new AddressParser();
+                AddressParser parser2 = new AddressParser();
+
+                String addressOne = String.format(address1.getText() + city1.getText() + zip1.getText());
+                String addressTwo = String.format(address2.getText() + city2.getText() + zip2.getText());
+
+                Platform.runLater(()->{
+                    try {
+                        InputStream formattedAddress1 = parser1.placeFromText(addressOne);
+                        String formattedUserAddress1 = parser1.parseUserAddress(formattedAddress1);
+                        checkAddress1.setText(formattedUserAddress1);
+
+                        InputStream formattedAddress2 = parser2.placeFromText(addressTwo);
+                        String formattedUserAddress2 = parser2.parseUserAddress(formattedAddress2);
+                        checkAddress2.setText(formattedUserAddress2);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    goButton.setDisable(false);
+                });
+            });
+        });
+
         return gridPane;
-        }
+
+    }
+
+
 
 
 }
