@@ -22,8 +22,6 @@ import java.util.concurrent.Executors;
 
 public class LetsLynkApplication extends Application {
 
-    private final Label display = new Label("Let's Lynk!");
-
     private final TextField address1Input = new TextField("");
     private final TextField city1Input = new TextField("");
     private final TextField zip1Input = new TextField("");
@@ -45,8 +43,8 @@ public class LetsLynkApplication extends Application {
 
     private final Button goButton = new Button("Let's Lynk!");
 
-    private Label checkAddress1 = new Label("");
-    private Label checkAddress2 = new Label("");
+    private final Label checkAddress1 = new Label("");
+    private final Label checkAddress2 = new Label("");
 
     private final Executor executor = Executors.newSingleThreadExecutor();
 
@@ -65,6 +63,7 @@ public class LetsLynkApplication extends Application {
     }
 
     private Parent createAddressEntryControl () {
+
         GridPane gridPane = new GridPane();
         gridPane.add(goButton,0,0);
         goButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
@@ -85,7 +84,6 @@ public class LetsLynkApplication extends Application {
         gridPane.add(distance2Label,2,6);
         gridPane.add(distance2Input,2,7);
 
-
         goButton.setOnAction((event) -> {
             goButton.setDisable(true);
 
@@ -93,11 +91,12 @@ public class LetsLynkApplication extends Application {
                 AddressParser parser1 = new AddressParser();
                 AddressParser parser2 = new AddressParser();
 
-                String addressOne = String.format(address1Input.getText() + city1Input.getText() + zip1Input.getText());
-                String addressTwo = String.format(address2Input.getText() + city2Input.getText() + zip2Input.getText());
+                String addressOne = (address1Input.getText() + city1Input.getText() + zip1Input.getText());
+                String addressTwo = (address2Input.getText() + city2Input.getText() + zip2Input.getText());
 
                 Platform.runLater(()->{
                     try {
+                        gridPane.getChildren().clear();
                         InputStream formattedAddress1 = parser1.placeFromText(addressOne);
                         String formattedUserAddress1 = parser1.parseUserAddress(formattedAddress1);
                         checkAddress1.setText(formattedUserAddress1);
@@ -116,7 +115,6 @@ public class LetsLynkApplication extends Application {
         return gridPane;
 
     }
-
 
 
 
