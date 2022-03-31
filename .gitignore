@@ -1,2 +1,3 @@
 .idea/
 /src/test/resources/privateResources/
+/src/main/resources/privateResources/

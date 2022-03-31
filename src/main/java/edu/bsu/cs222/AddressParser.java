@@ -23,46 +23,19 @@ public class AddressParser {
         String encodedUrlString = URLEncoder.encode(address, Charset.defaultCharset());
 
         String urlString = String.format("https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=%s&inputtype=textquery&fields=formatted_address%%2Cgeometry&key=%s",encodedUrlString , key());
-        try {
-            URL url = new URL(urlString);
-            URLConnection connection = url.openConnection();
-            connection.setRequestProperty("User-Agent",
-                    "Revision Reporter/0.1 (http://www.cs.bsu.edu/~pvg/courses/cs222Sp22; lyle@uv.city)");
-            return connection.getInputStream();
-        }
-        catch (MalformedURLException malformedURLException){
-            throw new RuntimeException(malformedURLException);
-        }
+        return tryCatch(urlString);
     }
     private InputStream placeNearSearch(Double latitude, Double longitude, String venueType) throws IOException {
         String format = "%2C";
         String formatter = String.format("%f%s%f",latitude,format, longitude);
         String urlString = String.format("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%s&rankby=distance&type=%s&formatted_address&key=%s",formatter, venueType, key());
-        try {
-            URL url = new URL(urlString);
-            URLConnection connection = url.openConnection();
-            connection.setRequestProperty("User-Agent",
-                    "Revision Reporter/0.1 (http://www.cs.bsu.edu/~pvg/courses/cs222Sp22; lyle@uv.city)");
-            return connection.getInputStream();
-        }
-        catch (MalformedURLException malformedURLException){
-            throw new RuntimeException(malformedURLException);
-        }
+        return tryCatch(urlString);
     }
     private InputStream directionsAndDistance( String placeFrom , String placeTo) throws IOException {
         String from = URLEncoder.encode(placeFrom, Charset.defaultCharset());
         String to = URLEncoder.encode(placeTo, Charset.defaultCharset());
         String urlString = String.format("https://maps.googleapis.com/maps/api/directions/json?origin=%s&destination=%s&key=%s" ,from, to, key());
-        try {
-            URL url = new URL(urlString);
-            URLConnection connection = url.openConnection();
-            connection.setRequestProperty("User-Agent",
-                    "Revision Reporter/0.1 (http://www.cs.bsu.edu/~pvg/courses/cs222Sp22; lyle@uv.city)");
-            return connection.getInputStream();
-        }
-        catch (MalformedURLException malformedURLException){
-            throw new RuntimeException(malformedURLException);
-        }
+        return tryCatch(urlString);
     }
     //______________________________________________________________________________________________________________________
     public Double returnAverageLatitude( InputStream userOneAddress , InputStream userTwoAddress) throws IOException {
@@ -106,5 +79,18 @@ public class AddressParser {
     public String parseDistanceToAddress(InputStream testDataStream) throws IOException{
         JSONArray distance = JsonPath.read(testDataStream, "$..distance.text");
         return distance.get(0).toString();
+    }
+
+    public InputStream tryCatch(String urlString)throws IOException{
+        try {
+            URL url = new URL(urlString);
+            URLConnection connection = url.openConnection();
+            connection.setRequestProperty("User-Agent",
+                    "Revision Reporter/0.1 (http://www.cs.bsu.edu/~pvg/courses/cs222Sp22; lyle@uv.city)");
+            return connection.getInputStream();
+        }
+        catch (MalformedURLException malformedURLException){
+            throw new RuntimeException(malformedURLException);
+        }
     }
 }
