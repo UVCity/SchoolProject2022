@@ -43,8 +43,8 @@ public class LetsLynkApplication extends Application {
 
     private final Button goButton = new Button("Let's Lynk!");
 
-    private final Label checkAddress1 = new Label("");
-    private final Label checkAddress2 = new Label("");
+    private  final Label checkAddress1 = new Label("");
+    private  final Label checkAddress2 = new Label("");
 
     private final Executor executor = Executors.newSingleThreadExecutor();
 
@@ -84,6 +84,9 @@ public class LetsLynkApplication extends Application {
         gridPane.add(distance2Label,2,6);
         gridPane.add(distance2Input,2,7);
 
+
+
+
         goButton.setOnAction((event) -> {
             goButton.setDisable(true);
 
@@ -97,6 +100,7 @@ public class LetsLynkApplication extends Application {
                 Platform.runLater(()->{
                     try {
                         gridPane.getChildren().clear();
+
                         InputStream formattedAddress1 = parser1.placeFromText(addressOne);
                         String formattedUserAddress1 = parser1.parseUserAddress(formattedAddress1);
                         checkAddress1.setText(formattedUserAddress1);
@@ -111,6 +115,8 @@ public class LetsLynkApplication extends Application {
                 });
             });
         });
+
+
 
         return gridPane;
 
