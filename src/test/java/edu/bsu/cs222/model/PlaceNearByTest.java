@@ -9,8 +9,10 @@ import java.io.InputStream;
 
 
 public class PlaceNearByTest {
-    public final InputStream placeNearByStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("PlaceNearBySearchData.json");
-    public final AddressParser parser = new AddressParser();
+
+    private final InputStream placeNearByStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("PlaceNearBySearchData.json");
+    private final AddressParser parser = new AddressParser();
+
     @Test
     public void parseVenueAddressTest() throws IOException {
         String address = parser.parseVenueAddress(placeNearByStream);

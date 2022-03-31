@@ -9,8 +9,8 @@ import java.io.InputStream;
 
 public class PlaceFromTextTest {
 
-    public final InputStream placeFromTextStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("FindPlaceFromTextData.json");
-    public final AddressParser parser = new AddressParser();
+    private final InputStream placeFromTextStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("FindPlaceFromTextData.json");
+    private final AddressParser parser = new AddressParser();
 
     @Test
     public void parseUserAddressTest() throws IOException {
