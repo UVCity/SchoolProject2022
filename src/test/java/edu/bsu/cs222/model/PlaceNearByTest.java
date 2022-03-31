@@ -28,12 +28,12 @@ public class PlaceNearByTest {
     }
     @Test
     public void parseVenueLongitudeTest() throws IOException {
-        String longitude = parser.parseLongitude(placeNearByStream);
-        Assertions.assertEquals("-85.419575",longitude);
+        Double longitude = parser.parseLongitude(placeNearByStream);
+        Assertions.assertEquals(-85.419575,longitude);
     }
     @Test
     public void parseVenueLatitudeTest() throws IOException {
-        String latitude = parser.parseLatitude(placeNearByStream);
-        Assertions.assertEquals("40.189823", latitude);
+        Double latitude = parser.parseLatitude(placeNearByStream);
+        Assertions.assertEquals(40.189823, latitude);
     }
 }

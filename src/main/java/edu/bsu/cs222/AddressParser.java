@@ -38,11 +38,9 @@ public class AddressParser {
         return tryCatch(urlString);
     }
     //______________________________________________________________________________________________________________________
-    public Double returnAverageLatitude( InputStream userOneAddress , InputStream userTwoAddress) throws IOException {
-        return (Double.parseDouble(parseLatitude(userOneAddress)) + Double.parseDouble(parseLatitude(userTwoAddress)))/2;
-    }
-    public Double returnAverageLongitude( InputStream userOneAddress , InputStream userTwoAddress) throws IOException {
-        return (Double.parseDouble(parseLongitude(userOneAddress)) + Double.parseDouble(parseLongitude(userTwoAddress)))/2;
+    //returnAverage will need to be modified to run more than two sets of data and return their average
+    public Double returnAverage(Double variable1, Double variable2){
+        return (variable1 + variable2)/2;
     }
     public String parseVenueAddress(InputStream testDataStream) throws IOException {
         JSONArray address = JsonPath.read(testDataStream, "$..vicinity");
@@ -68,13 +66,13 @@ public class AddressParser {
         JSONArray openValue = JsonPath.read(testDataStream, "$..open_now");
         return openValue.get(0).toString();
     }
-    public String parseLongitude (InputStream testDataStream) throws IOException {
+    public Double parseLongitude (InputStream testDataStream) throws IOException {
         JSONArray longitude = JsonPath.read(testDataStream, "$..location.lng");
-        return longitude.get(0).toString();
+        return (Double) longitude.get(0);
     }
-    public String parseLatitude (InputStream testDataStream) throws IOException {
+    public Double parseLatitude (InputStream testDataStream) throws IOException {
         JSONArray latitude = JsonPath.read(testDataStream, "$..location.lat");
-        return latitude.get(0).toString();
+        return (Double) latitude.get(0);
     }
     public String parseDistanceToAddress(InputStream testDataStream) throws IOException{
         JSONArray distance = JsonPath.read(testDataStream, "$..distance.text");
