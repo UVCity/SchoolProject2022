@@ -39,8 +39,8 @@ public class AddressParser {
     }
     //______________________________________________________________________________________________________________________
     //returnAverage will need to be modified to run more than two sets of data and return their average
-    public Double returnAverage(Double variable1, Double variable2){
-        return (variable1 + variable2)/2;
+    public Double returnAverage(Double lat_long1, Double lat_long2){
+        return (lat_long1 + lat_long2)/2;
     }
     public String parseVenueAddress(InputStream testDataStream) throws IOException {
         JSONArray address = JsonPath.read(testDataStream, "$..vicinity");
