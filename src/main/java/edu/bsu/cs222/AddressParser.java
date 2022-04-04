@@ -46,10 +46,6 @@ public class AddressParser {
         JSONArray address = JsonPath.read(testDataStream, "$..vicinity");
         return address.get(0).toString();
     }
-    public String parseVenueAddressURL(Double latitude, Double longitude, String venueType) throws IOException {
-        JSONArray address = JsonPath.read(placeNearSearch(latitude, longitude, venueType), "$..vicinity");
-        return address.get(0).toString();
-    }
     public String parseUserAddress(InputStream testDataStream) throws IOException {
         JSONArray address = JsonPath.read(testDataStream, "$..formatted_address");
         return address.get(0).toString();
