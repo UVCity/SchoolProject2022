@@ -54,10 +54,6 @@ public class AddressParser {
         JSONArray address = JsonPath.read(testDataStream, "$..formatted_address");
         return address.get(0).toString();
     }
-    public String parseUserAddressURL(String input) throws IOException{
-        JSONArray address = JsonPath.read(placeFromText(input), "$..formatted_address");
-        return address.get(0).toString();
-    }
     public String parseName (InputStream testDataStream) throws IOException {
         JSONArray name = JsonPath.read(testDataStream, "$..name");
         return name.get(0).toString();

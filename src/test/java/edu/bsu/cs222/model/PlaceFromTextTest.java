@@ -51,10 +51,5 @@ public class PlaceFromTextTest {
         String address = parser.parseVenueAddressURL(40.208118150000004, -85.41264945, "restaurant");
         Assertions.assertEquals("Ball State University North Dining 201, 1525 North McKinley Avenue, Muncie", address);
     }
-    @Test
-    public void parseUserAddressURLTest() throws IOException {
-        String address = parser.parseUserAddressURL("2720 West Jackson Street Muncie IN 47304");
-        Assertions.assertEquals("2720 W Jackson St, Muncie, IN 47303, USA",address);
-    }
 
 }
