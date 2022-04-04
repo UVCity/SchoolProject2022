@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -22,105 +23,128 @@ import java.util.concurrent.Executors;
 
 public class LetsLynkApplication extends Application {
 
-    private final TextField address1Input = new TextField("");
-    private final TextField city1Input = new TextField("");
-    private final TextField zip1Input = new TextField("");
-    private final TextField distance1Input = new TextField("");
-    private final Label address1Label = new Label("Input street address (Ex: 123 Oak Street)");
-    private final Label city1Label = new Label("Input city and state (Ex: Muncie, IN)");
-    private final Label zip1Label = new Label("Input zipcode (Ex: 47306)");
-    private final Label distance1Label = new Label("Input distance you are willing to commute in miles (Ex: 5)");
+    private final Label addressOneLabel = new Label("Input user 1 address (Ex: 1500 W Riverside Ave. Muncie, IN 47303)");
+    private final TextField addressOneInput = new TextField("");
+    private final Label addressTwoLabel = new Label("Input user 1 address (Ex: 1500 W Riverside Ave. Muncie, IN 47303)");
+    private final TextField addressTwoInput = new TextField("");
 
-    private final TextField address2Input = new TextField("");
-    private final TextField city2Input = new TextField("");
-    private final TextField zip2Input = new TextField("");
-    private final TextField distance2Input = new TextField("");
-    private final Label address2Label = new Label("Input street address (Ex: 123 Oak Street)");
-    private final Label city2Label = new Label("Input city and state (Ex: Muncie, IN)");
-    private final Label zip2Label = new Label("Input zipcode (Ex: 47306)");
-    private final Label distance2Label = new Label("Input distance you are willing to commute in miles (Ex: 5)");
+    private final Button letsLynkButton = new Button("Let's Lynk!");
+    private final Executor letsLynkExecutor = Executors.newSingleThreadExecutor();
 
+    private final Label formattedAddress1 = new Label("");
+    private final Label formattedAddress2 = new Label("");
+    private final Button yesButton = new Button("This is my address!");
+    //private final Button noButton = new Button("This is NOT my address!");
+    private final Executor yesButtonExecutor = Executors.newSingleThreadExecutor();
+    //private final Executor noButtonExecutor = Executors.newSingleThreadExecutor();
 
-    private final Button goButton = new Button("Let's Lynk!");
+    AddressParser parser1 = new AddressParser();
+    AddressParser parser2 = new AddressParser();
+    AddressParser parser3 = new AddressParser();
 
-    private  final Label checkAddress1 = new Label("");
-    private  final Label checkAddress2 = new Label("");
+    private final Label venueInformation = new Label("");
 
-    private final Executor executor = Executors.newSingleThreadExecutor();
-
-
-    @Override
     public void start(Stage primaryStage) {
-        primaryStage.setScene(makeScene());
+        setUpWindow(primaryStage);
+        setLetsLynkButtonClick();
+        setYesButtonClick();
         primaryStage.show();
     }
 
-    private Scene makeScene() {
-        VBox vBox1 = new VBox();
-        Parent addressEntryArea = createAddressEntryControl();
-        vBox1.getChildren().addAll(goButton, addressEntryArea);
-        return new Scene(vBox1);
+    private void setUpWindow(Stage primaryStage){
+        primaryStage.setTitle("Let's-Lynk");
+        primaryStage.setScene(new Scene(createWindow()));
+        primaryStage.setOnCloseRequest(X -> Platform.exit());
+
     }
 
-    private Parent createAddressEntryControl () {
+    public Parent createWindow() {
+        VBox bigBox = new VBox();
+        HBox window = new HBox();
+        VBox user1Info = new VBox();
+        VBox user2Info = new VBox();
+        bigBox.getChildren().addAll(
+                letsLynkButton,
+                window,
+                yesButton,
+                venueInformation
+        );
 
-        GridPane gridPane = new GridPane();
-        gridPane.add(goButton,0,0);
-        goButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        gridPane.add(address1Label,1,0);
-        gridPane.add(address1Input,1,1);
-        gridPane.add(address2Label,2,0);
-        gridPane.add(address2Input,2,1);
-        gridPane.add(city1Label,1,2);
-        gridPane.add(city1Input,1,3);
-        gridPane.add(city2Label,2,2);
-        gridPane.add(city2Input,2,3);
-        gridPane.add(zip1Label,1,4);
-        gridPane.add(zip1Input,1,5);
-        gridPane.add(zip2Label,2,4);
-        gridPane.add(zip2Input,2,5);
-        gridPane.add(distance1Label,1,6);
-        gridPane.add(distance1Input,1,7);
-        gridPane.add(distance2Label,2,6);
-        gridPane.add(distance2Input,2,7);
+        window.getChildren().addAll(
+                user1Info,
+                user2Info
+        );
+
+        user2Info.getChildren().addAll(
+                addressTwoLabel,
+                addressTwoInput
+        );
+
+        user1Info.getChildren().addAll(
+                addressOneLabel,
+                addressOneInput
+        );
+        letsLynkButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        return bigBox;
+    }
 
 
+    private void setLetsLynkButtonClick(){
+        letsLynkButton.setOnAction((event) -> {
+            letsLynkButton.setDisable(true);
 
+            letsLynkExecutor.execute(()->{
 
-        goButton.setOnAction((event) -> {
-            goButton.setDisable(true);
+                try {
+                    InputStream address1Comparison = parser1.placeFromText(addressOneInput.getText());
+                    String address1Print = parser1.parseUserAddress(address1Comparison);
+                    formattedAddress1.setText(address1Print);
 
-            executor.execute(()->{
-                AddressParser parser1 = new AddressParser();
-                AddressParser parser2 = new AddressParser();
-
-                String addressOne = (address1Input.getText() + city1Input.getText() + zip1Input.getText());
-                String addressTwo = (address2Input.getText() + city2Input.getText() + zip2Input.getText());
-
-                Platform.runLater(()->{
-                    try {
-                        gridPane.getChildren().clear();
-
-                        InputStream formattedAddress1 = parser1.placeFromText(addressOne);
-                        String formattedUserAddress1 = parser1.parseUserAddress(formattedAddress1);
-                        checkAddress1.setText(formattedUserAddress1);
-
-                        InputStream formattedAddress2 = parser2.placeFromText(addressTwo);
-                        String formattedUserAddress2 = parser2.parseUserAddress(formattedAddress2);
-                        checkAddress2.setText(formattedUserAddress2);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    goButton.setDisable(false);
-                });
+                    InputStream address2Comparison = parser2.placeFromText(addressTwoInput.getText());
+                    String address2Print = parser2.parseUserAddress(address2Comparison);
+                    formattedAddress2.setText(address2Print);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                letsLynkButton.setDisable(false);
             });
         });
-
-
-
-        return gridPane;
-
     }
+
+
+    private void setYesButtonClick(){
+        yesButton.setOnAction((event) -> {
+            yesButton.setDisable(true);
+
+            yesButtonExecutor.execute(()->{
+
+                try {
+                    InputStream address1Comparison = parser1.placeFromText(addressOneInput.getText());
+                    Double forLat1 = parser1.parseLatitude(address1Comparison);
+                    Double forLon1 = parser1.parseLongitude(address1Comparison);
+
+                    InputStream address2Comparison = parser2.placeFromText(addressTwoInput.getText());
+                    Double forLat2 = parser2.parseLatitude(address2Comparison);
+                    Double forLon2 = parser2.parseLongitude(address2Comparison);
+
+                    Double avgLat = parser2.returnAverage(forLat1, forLat2);
+                    Double avgLon = parser2.returnAverage(forLon1, forLon2);
+
+                    InputStream venueStream = parser3.placeNearSearch(avgLat, avgLon, "Restaurant");
+
+                    String venueAddress = parser3.parseVenueAddress(venueStream);
+                    String venueName = parser3.parseName(venueStream);
+                    String venueHours = parser3.parseHoursOfOperation(venueStream);
+
+                    venueInformation.setText(venueName + " " + venueAddress + " " + venueHours);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+        });
+    }
+
 
 
 

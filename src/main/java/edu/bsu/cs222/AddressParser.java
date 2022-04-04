@@ -25,7 +25,7 @@ public class AddressParser {
         String urlString = String.format("https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=%s&inputtype=textquery&fields=formatted_address%%2Cgeometry&key=%s",encodedUrlString , key());
         return tryCatch(urlString);
     }
-    private InputStream placeNearSearch(Double latitude, Double longitude, String venueType) throws IOException {
+    public InputStream placeNearSearch(Double latitude, Double longitude, String venueType) throws IOException {
         String format = "%2C";
         String formatter = String.format("%f%s%f",latitude,format, longitude);
         String urlString = String.format("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%s&rankby=distance&type=%s&formatted_address&key=%s",formatter, venueType, key());
