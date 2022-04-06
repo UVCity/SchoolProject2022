@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.io.InputStream;
 
-
-
 public class PlaceNearByTest {
     private final InputStream placeNearByStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("PlaceNearBySearchData.json");
     private final AddressParser parser = new AddressParser();
@@ -57,5 +55,4 @@ public class PlaceNearByTest {
         String address = parser.parseVenueAddress(venue);
         Assertions.assertEquals("Ball State University North Dining 201, 1525 North McKinley Avenue, Muncie", address);
     }
-
 }

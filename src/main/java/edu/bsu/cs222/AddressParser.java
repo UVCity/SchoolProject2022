@@ -12,42 +12,39 @@ import java.net.URLEncoder;
 import java.nio.charset.Charset;
 
 public class AddressParser {
-
-    //______________________________________________________________________________P A R S E R S
-    public String parseVenueAddress(InputStream testDataStream) throws IOException {
+    //P A R S E R S
+    public String parseVenueAddress(InputStream testDataStream) throws IOException {                                    //nearBySearch Api
         JSONArray address = JsonPath.read(testDataStream, "$..vicinity");
         return address.get(0).toString();
     }
-    public String parseUserAddress(InputStream testDataStream) throws IOException {
+    public String parseUserAddress(InputStream testDataStream) throws IOException {                                     //placeFromText Api
         JSONArray address = JsonPath.read(testDataStream, "$..formatted_address");
         return address.get(0).toString();
     }
-    public String parseName (InputStream testDataStream) throws IOException {
+    public String parseName (InputStream testDataStream) throws IOException {                                           //nearBySearch Api
         JSONArray name = JsonPath.read(testDataStream, "$..name");
         return name.get(0).toString();
     }
-    public String parseHoursOfOperation (InputStream testDataStream) throws IOException {
+    public String parseHoursOfOperation (InputStream testDataStream) throws IOException {                               //nearBySearch Api
         JSONArray openValue = JsonPath.read(testDataStream, "$..open_now");
         return openValue.get(0).toString();
     }
-    public String parseDistanceToAddress(InputStream testDataStream) throws IOException {
+    public String parseDistanceToAddress(InputStream testDataStream) throws IOException {                               //Directions Api
         JSONArray distance = JsonPath.read(testDataStream, "$..distance.text");
         return distance.get(0).toString();
     }
-    public Double[] parseLatitudeAndLongitude(InputStream testDataStream) throws IOException {
+    public Double[] parseLatitudeAndLongitude(InputStream testDataStream) throws IOException {                          // Universal
         JSONArray latitudeAndLongitude = JsonPath.read(testDataStream, "$..location[?(@.lat)]");
         return splitLatitudeAndLongitude(latitudeAndLongitude.get(0).toString());
     }
 //________________________________________________________________________________________
     public InputStream placeFromText(String address) throws IOException {
         String encodedUrlString = URLEncoder.encode(address, Charset.defaultCharset());
-
         String urlString = String.format("https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=%s&inputtype=textquery&fields=formatted_address%%2Cgeometry&key=%s",encodedUrlString , key());
         return tryCatch(urlString);
     }
     public InputStream placeNearSearch(Double latitude, Double longitude, String venueType) throws IOException {
-        String format = "%2C";
-        String formatter = String.format("%f%s%f",latitude,format, longitude);
+        String formatter = String.format("%f%%2C%f",latitude, longitude);
         String urlString = String.format("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%s&rankby=distance&type=%s&formatted_address&key=%s",formatter, venueType, key());
         return tryCatch(urlString);
     }
