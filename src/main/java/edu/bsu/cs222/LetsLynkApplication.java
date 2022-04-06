@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -39,8 +38,6 @@ public class LetsLynkApplication extends Application {
     //private final Executor noButtonExecutor = Executors.newSingleThreadExecutor();
 
     AddressParser parser1 = new AddressParser();
-    AddressParser parser2 = new AddressParser();
-    AddressParser parser3 = new AddressParser();
 
     private final Label venueInformation = new Label("");
 
@@ -100,8 +97,8 @@ public class LetsLynkApplication extends Application {
                     String address1Print = parser1.parseUserAddress(address1Comparison);
                     formattedAddress1.setText(address1Print);
 
-                    InputStream address2Comparison = parser2.placeFromText(addressTwoInput.getText());
-                    String address2Print = parser2.parseUserAddress(address2Comparison);
+                    InputStream address2Comparison = parser1.placeFromText(addressTwoInput.getText());
+                    String address2Print = parser1.parseUserAddress(address2Comparison);
                     formattedAddress2.setText(address2Print);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -120,21 +117,20 @@ public class LetsLynkApplication extends Application {
 
                 try {
                     InputStream address1Comparison = parser1.placeFromText(addressOneInput.getText());
-                    Double forLat1 = parser1.parseLatitude(address1Comparison);
-                    Double forLon1 = parser1.parseLongitude(address1Comparison);
+                    InputStream address2Comparison = parser1.placeFromText(addressTwoInput.getText());
 
-                    InputStream address2Comparison = parser2.placeFromText(addressTwoInput.getText());
-                    Double forLat2 = parser2.parseLatitude(address2Comparison);
-                    Double forLon2 = parser2.parseLongitude(address2Comparison);
 
-                    Double avgLat = parser2.returnAverage(forLat1, forLat2);
-                    Double avgLon = parser2.returnAverage(forLon1, forLon2);
+                    Double [] latLong1 = parser1.parseLatitudeAndLongitude(address1Comparison);
+                    Double [] latLong2 = parser1.parseLatitudeAndLongitude(address2Comparison);
 
-                    InputStream venueStream = parser3.placeNearSearch(avgLat, avgLon, "Restaurant");
 
-                    String venueAddress = parser3.parseVenueAddress(venueStream);
-                    String venueName = parser3.parseName(venueStream);
-                    String venueHours = parser3.parseHoursOfOperation(venueStream);
+                    Double [] avgCoordinates = parser1.returnAverage(latLong1, latLong2);
+
+                    InputStream venueStream = parser1.placeNearSearch(avgCoordinates[0], avgCoordinates[1], "Restaurant");
+
+                    String venueAddress = parser1.parseVenueAddress(venueStream);
+                    String venueName = parser1.parseName(venueStream);
+                    String venueHours = parser1.parseHoursOfOperation(venueStream);
 
                     venueInformation.setText(venueName + " " + venueAddress + " " + venueHours);
 

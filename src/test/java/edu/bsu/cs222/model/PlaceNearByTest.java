@@ -46,7 +46,7 @@ public class PlaceNearByTest {
     @Test
     public void parseVenueNearByFromURLTest() throws IOException {
         InputStream place1 = parser.placeFromText("1615 Riverside Avenue 47303, Muncie IN");
-        InputStream place2 = parser.placeFromText("2800 Tillotson Avenue 47304, Muncie IN ");
+        InputStream place2 = parser.placeFromText("2800 Tillotson Avenue 47304, Muncie IN");
         Double[] coordinatesA = parser.parseLatitudeAndLongitude(place1);
         Double[] coordinatesB = parser.parseLatitudeAndLongitude(place2);
         Double[] midPointLocation = parser.returnAverage(coordinatesA, coordinatesB);
