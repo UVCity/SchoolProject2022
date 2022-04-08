@@ -21,4 +21,10 @@ public class PlaceFromTextTest {
         Assertions.assertEquals(40.1934735, latitudeAndLongitude[0]);
         Assertions.assertEquals(-85.4186142, latitudeAndLongitude[1]);
     }
+    @Test
+    public void parseUserAddressTestURL() throws IOException {
+        InputStream request = parser.placeFromText("2720 W Jackson Street Munci 47303");
+        String address = parser.parseUserAddress(request);
+        Assertions.assertEquals("2720 W Jackson St, Muncie, IN 47303, USA", address);
+    }
 }
