@@ -23,7 +23,7 @@ public class PlaceFromTextTest {
     }
     @Test
     public void parseUserAddressTestURL() throws IOException {
-        InputStream request = parser.placeFromText("2720 W Jackson Street Munci 47303");
+        InputStream request = parser.placeFromText("2720 W Jockson Street Munci 47303");
         String address = parser.parseUserAddress(request);
         Assertions.assertEquals("2720 W Jackson St, Muncie, IN 47303, USA", address);
     }
