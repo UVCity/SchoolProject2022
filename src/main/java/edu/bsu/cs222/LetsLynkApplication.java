@@ -53,6 +53,10 @@ public class LetsLynkApplication extends Application {
     public void start(Stage primaryStage) {
         primaryStage.setScene(makeScene());
         primaryStage.show();
+        address1Input.setPromptText("ex. 9999 Heckin Rd");
+        city1Input.setPromptText("ex. Actually Hell");
+        zip1Input.setPromptText("ex. 66666");
+        distance1Input.setPromptText("ex. 50mi");
     }
 
     private Scene makeScene() {
