@@ -39,6 +39,7 @@ public class LetsLynkApplication extends Application {
     private final Label addressTwoLabel = new Label("User 2 Address");
     private final Label cityTwoLabel = new Label("User 2 City");
     private final Label zipTwoLabel = new Label("User 2 Zip");
+    private final Label venueInformation = new Label("");
 
     private final Button letsLynkButton = new Button("Let's Lynk!");
     private final Executor letsLynkExecutor = Executors.newSingleThreadExecutor();
@@ -51,8 +52,6 @@ public class LetsLynkApplication extends Application {
     //private final Executor noButtonExecutor = Executors.newSingleThreadExecutor();
 
     AddressParser addressParser = new AddressParser();
-
-    private final Label venueInformation = new Label("");
 
     public void start(Stage primaryStage) {
         setUpWindow(primaryStage);
@@ -142,21 +141,25 @@ public class LetsLynkApplication extends Application {
             yesButtonExecutor.execute(()->{
 
                 try {
-                    InputStream address1Comparison = addressParser.placeFromText(addressOneInput.getText());
+                    /*InputStream address1Comparison = addressParser.placeFromText(addressOneInput.getText());
                     InputStream address2Comparison = addressParser.placeFromText(addressTwoInput.getText());
 
-
                     Double [] latLong1 = addressParser.parseLatitudeAndLongitude(address1Comparison);
-                    Double [] latLong2 = addressParser.parseLatitudeAndLongitude(address2Comparison);
+                    Double [] latLong2 = addressParser.parseLatitudeAndLongitude(address2Comparison);*/
+
+                    Double[] latLong1 = inputStreamInstantiate(addressOneInput);
+                    Double[] latLong2 = inputStreamInstantiate(addressTwoInput);
 
 
                     Double [] avgCoordinates = addressParser.returnAverage(latLong1, latLong2);
 
-                    InputStream venueStream = addressParser.placeNearSearch(avgCoordinates[0], avgCoordinates[1], "Restaurant");
+                    InputStream venueStream1 = addressParser.placeNearSearch(avgCoordinates[0], avgCoordinates[1], "Restaurant");
+                    InputStream venueStream2 = addressParser.placeNearSearch(avgCoordinates[0], avgCoordinates[1], "Restaurant");
+                    InputStream venueStream3 = addressParser.placeNearSearch(avgCoordinates[0], avgCoordinates[1], "Restaurant");
 
-                    String venueAddress = addressParser.parseVenueAddress(venueStream);
-                    String venueName = addressParser.parseName(venueStream);
-                    String venueHours = addressParser.parseHoursOfOperation(venueStream);
+                    String venueAddress = addressParser.parseVenueAddress(venueStream1);
+                    String venueName = addressParser.parseName(venueStream2);
+                    String venueHours = addressParser.parseHoursOfOperation(venueStream3);
 
                     venueInformation.setText(venueName + " " + venueAddress + " " + venueHours);
 
@@ -165,6 +168,11 @@ public class LetsLynkApplication extends Application {
                 }
             });
         });
+    }
+
+    private Double [] inputStreamInstantiate(TextField addressInput) throws IOException {
+        InputStream addressComparison = addressParser.placeFromText(addressInput.getText());
+        return addressParser.parseLatitudeAndLongitude(addressComparison);
     }
 
 
