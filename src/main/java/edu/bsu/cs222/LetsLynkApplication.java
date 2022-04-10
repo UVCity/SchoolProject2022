@@ -59,11 +59,11 @@ public class LetsLynkApplication extends Application {
         setLetsLynkButtonClick();
         primaryStage.show();
         addressOneInput.setPromptText("ex. 1525 W McKinley Ave");
-        cityOneInput.setPromptText("ex. Muncie");
+        cityOneInput.setPromptText("ex. Muncie, IN");
         zipOneInput.setPromptText("ex. 47303");
         distanceOneInput.setPromptText("ex. 50mi");
         addressTwoInput.setPromptText("ex. 2000 N University Ave");
-        cityTwoInput.setPromptText("ex. Muncie");
+        cityTwoInput.setPromptText("ex. Muncie, IN");
         zipTwoInput.setPromptText("ex. 47303");
         distanceTwoInput.setPromptText("ex. 50mi");
     }
