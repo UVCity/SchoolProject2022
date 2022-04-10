@@ -26,11 +26,9 @@ public class LetsLynkApplication extends Application {
     private final TextField addressOneInput = new TextField();
     private final TextField cityOneInput = new TextField();
     private final TextField zipOneInput = new TextField();
-    private final TextField distanceOneInput = new TextField();
     private final TextField addressTwoInput = new TextField();
     private final TextField cityTwoInput = new TextField();
     private final TextField zipTwoInput = new TextField();
-    private final TextField distanceTwoInput = new TextField();
 
     // Labels
     private final Label addressOneLabel = new Label("User 1 Address");
@@ -58,14 +56,12 @@ public class LetsLynkApplication extends Application {
         setUpWindow(primaryStage);
         setLetsLynkButtonClick();
         primaryStage.show();
-        addressOneInput.setPromptText("ex. 1525 W McKinley Ave");
+        addressOneInput.setPromptText("ex. 1615 West Riverside Avenue");
         cityOneInput.setPromptText("ex. Muncie, IN");
         zipOneInput.setPromptText("ex. 47303");
-        distanceOneInput.setPromptText("ex. 50mi");
-        addressTwoInput.setPromptText("ex. 2000 N University Ave");
+        addressTwoInput.setPromptText("2800 North Tillotson Avenue");
         cityTwoInput.setPromptText("ex. Muncie, IN");
-        zipTwoInput.setPromptText("ex. 47303");
-        distanceTwoInput.setPromptText("ex. 50mi");
+        zipTwoInput.setPromptText("ex. 47304");
     }
 
     private void setUpWindow(Stage primaryStage){
