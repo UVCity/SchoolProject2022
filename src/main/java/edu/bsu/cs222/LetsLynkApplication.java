@@ -20,7 +20,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 
-public class LetsLynkApplication extends Application {
+public class LetsLynkApplication extends Application{
 
     // Input Fields
     private final TextField addressOneInput = new TextField();
@@ -39,13 +39,14 @@ public class LetsLynkApplication extends Application {
     private final Label addressTwoLabel = new Label("User 2 Address");
     private final Label cityTwoLabel = new Label("User 2 City");
     private final Label zipTwoLabel = new Label("User 2 Zip");
-    private final Label venueInformation = new Label("");
+    private final Label venueInformation = new Label("test");
+    private final Label formattedAddress1 = new Label("");
+    private final Label formattedAddress2 = new Label("");
 
     private final Button letsLynkButton = new Button("Let's Lynk!");
     private final Executor letsLynkExecutor = Executors.newSingleThreadExecutor();
 
-    private final Label formattedAddress1 = new Label("");
-    private final Label formattedAddress2 = new Label("");
+
     private final Button yesButton = new Button("This is my address!");
     //private final Button noButton = new Button("This is NOT my address!");
     private final Executor yesButtonExecutor = Executors.newSingleThreadExecutor();
@@ -75,7 +76,7 @@ public class LetsLynkApplication extends Application {
 
     }
 
-    public Parent createWindow() {
+    public Parent createWindow(){
         VBox mainWindow = new VBox();
         HBox content = new HBox();
         VBox input1 = new VBox();
