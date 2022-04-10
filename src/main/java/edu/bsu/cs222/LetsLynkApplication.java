@@ -48,6 +48,7 @@ public class LetsLynkApplication extends Application {
 
     private final Label venue = new Label("");
     private final Label venueInfo = new Label("");
+    private final Label venueOpenValue = new Label("");
 
     AddressParser addressParser = new AddressParser();
 
@@ -79,7 +80,8 @@ public class LetsLynkApplication extends Application {
                 letsLynkButton,
                 content,
                 venue,
-                venueInfo
+                venueInfo,
+                venueOpenValue
         );
         content.getChildren().addAll(
                 input1,
@@ -148,8 +150,11 @@ public class LetsLynkApplication extends Application {
 
                 InputStream venueURL1 = addressParser.placeNearSearch(avgLatLong[0], avgLatLong[1], "restaurant");
                 InputStream venueURL2 = addressParser.placeNearSearch(avgLatLong[0], avgLatLong[1], "restaurant");
+                InputStream venueURL3= addressParser.placeNearSearch(avgLatLong[0], avgLatLong[1], "restaurant");
+
                 venue.setText(addressParser.parseVenueAddress(venueURL1));
                 venueInfo.setText(addressParser.parseName(venueURL2));
+                venueOpenValue.setText("This venue is open: " + addressParser.parseHoursOfOperation(venueURL3));
 
             } catch (IOException e) {
                 e.printStackTrace();
