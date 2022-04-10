@@ -39,24 +39,24 @@ public class LetsLynkApplication extends Application {
     private final Label addressTwoLabel = new Label("User 2 Address");
     private final Label cityTwoLabel = new Label("User 2 City");
     private final Label zipTwoLabel = new Label("User 2 Zip");
-    private final Label venueInformation = new Label("");
 
     private final Button letsLynkButton = new Button("Let's Lynk!");
     private final Executor letsLynkExecutor = Executors.newSingleThreadExecutor();
 
     private final Label formattedAddress1 = new Label("");
     private final Label formattedAddress2 = new Label("");
-    private final Button yesButton = new Button("This is my address!");
-    //private final Button noButton = new Button("This is NOT my address!");
-    private final Executor yesButtonExecutor = Executors.newSingleThreadExecutor();
-    //private final Executor noButtonExecutor = Executors.newSingleThreadExecutor();
+
+    // Result Information
+
+    private final Label venue = new Label("");
+    private final Label venueInfo = new Label("");
 
     AddressParser addressParser = new AddressParser();
+
 
     public void start(Stage primaryStage) {
         setUpWindow(primaryStage);
         setLetsLynkButtonClick();
-        setYesButtonClick();
         primaryStage.show();
         addressOneInput.setPromptText("ex. 1525 W McKinley Ave");
         cityOneInput.setPromptText("ex. Muncie");
@@ -83,8 +83,8 @@ public class LetsLynkApplication extends Application {
         mainWindow.getChildren().addAll(
                 letsLynkButton,
                 content,
-                yesButton,
-                venueInformation
+                venue,
+                venueInfo
         );
         content.getChildren().addAll(
                 input1,
@@ -116,66 +116,47 @@ public class LetsLynkApplication extends Application {
             letsLynkButton.setDisable(true);
 
             letsLynkExecutor.execute(()->{
-
-                try {
-                    InputStream address1Comparison = addressParser.placeFromText(addressOneInput.getText());
-                    String address1Print = addressParser.parseUserAddress(address1Comparison);
-                    formattedAddress1.setText(address1Print);
-
-                    InputStream address2Comparison = addressParser.placeFromText(addressTwoInput.getText());
-                    String address2Print = addressParser.parseUserAddress(address2Comparison);
-                    formattedAddress2.setText(address2Print);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                intakeUserInput();
+                useUserInput();
                 letsLynkButton.setDisable(false);
             });
         });
     }
 
 
-    private void setYesButtonClick(){
-        yesButton.setOnAction((event) -> {
-            yesButton.setDisable(true);
 
-            yesButtonExecutor.execute(()->{
+    private void intakeUserInput() {
+        try {
+            InputStream address1Comparison = addressParser.placeFromText(addressOneInput.getText());
+            String address1Print = addressParser.parseUserAddress(address1Comparison);
+            formattedAddress1.setText(address1Print);
 
-                try {
-                    /*InputStream address1Comparison = addressParser.placeFromText(addressOneInput.getText());
-                    InputStream address2Comparison = addressParser.placeFromText(addressTwoInput.getText());
-
-                    Double [] latLong1 = addressParser.parseLatitudeAndLongitude(address1Comparison);
-                    Double [] latLong2 = addressParser.parseLatitudeAndLongitude(address2Comparison);*/
-
-                    Double[] latLong1 = inputStreamInstantiate(addressOneInput);
-                    Double[] latLong2 = inputStreamInstantiate(addressTwoInput);
-
-
-                    Double [] avgCoordinates = addressParser.returnAverage(latLong1, latLong2);
-
-                    InputStream venueStream1 = addressParser.placeNearSearch(avgCoordinates[0], avgCoordinates[1], "Restaurant");
-                    InputStream venueStream2 = addressParser.placeNearSearch(avgCoordinates[0], avgCoordinates[1], "Restaurant");
-                    InputStream venueStream3 = addressParser.placeNearSearch(avgCoordinates[0], avgCoordinates[1], "Restaurant");
-
-                    String venueAddress = addressParser.parseVenueAddress(venueStream1);
-                    String venueName = addressParser.parseName(venueStream2);
-                    String venueHours = addressParser.parseHoursOfOperation(venueStream3);
-
-                    venueInformation.setText(venueName + " " + venueAddress + " " + venueHours);
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            });
-        });
+            InputStream address2Comparison = addressParser.placeFromText(addressTwoInput.getText());
+            String address2Print = addressParser.parseUserAddress(address2Comparison);
+            formattedAddress2.setText(address2Print);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    private Double [] inputStreamInstantiate(TextField addressInput) throws IOException {
-        InputStream addressComparison = addressParser.placeFromText(addressInput.getText());
-        return addressParser.parseLatitudeAndLongitude(addressComparison);
+    private void useUserInput() {
+        try {
+            InputStream addressOneURL = addressParser.placeFromText(formattedAddress1.getText());
+            InputStream addressTwoURL = addressParser.placeFromText(formattedAddress2.getText());
+
+            Double [] latLong1 = addressParser.parseLatitudeAndLongitude(addressOneURL);
+            Double [] latLong2 = addressParser.parseLatitudeAndLongitude(addressTwoURL);
+            Double [] avgLatLong = addressParser.returnAverage(latLong1, latLong2);
+
+            InputStream venueURL1 = addressParser.placeNearSearch(avgLatLong[0], avgLatLong[1],"restaurant" );
+            InputStream venueURL2 = addressParser.placeNearSearch(avgLatLong[0], avgLatLong[1],"restaurant" );
+            venue.setText(addressParser.parseVenueAddress(venueURL1));
+            venueInfo.setText(addressParser.parseVenueAddress(venueURL2));
+
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-
-
 
 
 }
