@@ -32,10 +32,10 @@ public class LetsLynkApplication extends Application {
 
     // Labels
     private final Label addressOneLabel = new Label("User 1 Address");
-    private final Label cityOneLabel = new Label("User 1 City");
+    private final Label cityOneLabel = new Label("User 1 City and State");
     private final Label zipOneLabel = new Label("User 1 Zip");
     private final Label addressTwoLabel = new Label("User 2 Address");
-    private final Label cityTwoLabel = new Label("User 2 City");
+    private final Label cityTwoLabel = new Label("User 2 City and State");
     private final Label zipTwoLabel = new Label("User 2 Zip");
 
     private final Button letsLynkButton = new Button("Let's Lynk!");
