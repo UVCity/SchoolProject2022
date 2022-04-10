@@ -153,7 +153,7 @@ public class LetsLynkApplication extends Application {
                 InputStream venueURL1 = addressParser.placeNearSearch(avgLatLong[0], avgLatLong[1], "restaurant");
                 InputStream venueURL2 = addressParser.placeNearSearch(avgLatLong[0], avgLatLong[1], "restaurant");
                 venue.setText(addressParser.parseVenueAddress(venueURL1));
-                venueInfo.setText(addressParser.parseVenueAddress(venueURL2));
+                venueInfo.setText(addressParser.parseName(venueURL2));
 
             } catch (IOException e) {
                 e.printStackTrace();
