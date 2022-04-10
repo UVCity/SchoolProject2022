@@ -72,7 +72,6 @@ public class LetsLynkApplication extends Application {
         primaryStage.setTitle("Let's-Lynk");
         primaryStage.setScene(new Scene(createWindow()));
         primaryStage.setOnCloseRequest(X -> Platform.exit());
-
     }
 
     public Parent createWindow() {
@@ -126,36 +125,40 @@ public class LetsLynkApplication extends Application {
 
 
     private void intakeUserInput() {
-        try {
-            InputStream address1Comparison = addressParser.placeFromText(addressOneInput.getText());
-            String address1Print = addressParser.parseUserAddress(address1Comparison);
-            formattedAddress1.setText(address1Print);
+        Platform.runLater(()-> {
+            try {
+                InputStream address1Comparison = addressParser.placeFromText(addressOneInput.getText());
+                String address1Print = addressParser.parseUserAddress(address1Comparison);
+                formattedAddress1.setText(address1Print);
 
-            InputStream address2Comparison = addressParser.placeFromText(addressTwoInput.getText());
-            String address2Print = addressParser.parseUserAddress(address2Comparison);
-            formattedAddress2.setText(address2Print);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+                InputStream address2Comparison = addressParser.placeFromText(addressTwoInput.getText());
+                String address2Print = addressParser.parseUserAddress(address2Comparison);
+                formattedAddress2.setText(address2Print);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     private void useUserInput() {
-        try {
-            InputStream addressOneURL = addressParser.placeFromText(formattedAddress1.getText());
-            InputStream addressTwoURL = addressParser.placeFromText(formattedAddress2.getText());
+        Platform.runLater(()-> {
+            try {
+                InputStream addressOneURL = addressParser.placeFromText(formattedAddress1.getText());
+                InputStream addressTwoURL = addressParser.placeFromText(formattedAddress2.getText());
 
-            Double [] latLong1 = addressParser.parseLatitudeAndLongitude(addressOneURL);
-            Double [] latLong2 = addressParser.parseLatitudeAndLongitude(addressTwoURL);
-            Double [] avgLatLong = addressParser.returnAverage(latLong1, latLong2);
+                Double[] latLong1 = addressParser.parseLatitudeAndLongitude(addressOneURL);
+                Double[] latLong2 = addressParser.parseLatitudeAndLongitude(addressTwoURL);
+                Double[] avgLatLong = addressParser.returnAverage(latLong1, latLong2);
 
-            InputStream venueURL1 = addressParser.placeNearSearch(avgLatLong[0], avgLatLong[1],"restaurant" );
-            InputStream venueURL2 = addressParser.placeNearSearch(avgLatLong[0], avgLatLong[1],"restaurant" );
-            venue.setText(addressParser.parseVenueAddress(venueURL1));
-            venueInfo.setText(addressParser.parseVenueAddress(venueURL2));
+                InputStream venueURL1 = addressParser.placeNearSearch(avgLatLong[0], avgLatLong[1], "restaurant");
+                InputStream venueURL2 = addressParser.placeNearSearch(avgLatLong[0], avgLatLong[1], "restaurant");
+                venue.setText(addressParser.parseVenueAddress(venueURL1));
+                venueInfo.setText(addressParser.parseVenueAddress(venueURL2));
 
-        }catch (IOException e) {
-            e.printStackTrace();
-        }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
 
