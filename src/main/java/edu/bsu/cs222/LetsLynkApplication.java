@@ -57,12 +57,12 @@ public class LetsLynkApplication extends Application {
         setUpWindow(primaryStage);
         setLetsLynkButtonClick();
         primaryStage.show();
-        addressOneInput.setPromptText("ex. 1615 West Riverside Avenue");
-        cityOneInput.setPromptText("ex. Muncie, IN");
-        zipOneInput.setPromptText("ex. 47303");
+        addressOneInput.setPromptText("1615 West Riverside Avenue");
+        cityOneInput.setPromptText("Muncie, IN");
+        zipOneInput.setPromptText("47303");
         addressTwoInput.setPromptText("2800 North Tillotson Avenue");
-        cityTwoInput.setPromptText("ex. Muncie, IN");
-        zipTwoInput.setPromptText("ex. 47304");
+        cityTwoInput.setPromptText("Muncie, IN");
+        zipTwoInput.setPromptText("47304");
     }
 
     private void setUpWindow(Stage primaryStage){
