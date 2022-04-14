@@ -38,22 +38,23 @@ public class LetsLynkApplication extends Application {
     private final Label addressTwoLabel = new Label("User 2 Address");
     private final Label cityTwoLabel = new Label("User 2 City and State");
     private final Label zipTwoLabel = new Label("User 2 Zip");
-
-    private final Button letsLynkButton = new Button("Let's Lynk!");
-    private final Executor letsLynkExecutor = Executors.newSingleThreadExecutor();
-
     private final Label formattedAddress1 = new Label("");
     private final Label formattedAddress2 = new Label("");
-
-    // Result Information
-
     private final Label venue = new Label("");
     private final Label venueInfo = new Label("");
     private final Label venueOpenValue = new Label("");
 
+    // Buttons
+    private final Button letsLynkButton = new Button("Let's Lynk!");
+
+    // Executors
+    private final Executor letsLynkExecutor = Executors.newSingleThreadExecutor();
+
+    // Classes used
     AddressParser addressParser = new AddressParser();
     URLFormatter urlFormatter = new URLFormatter();
 
+    // Show GUI
     public void start(Stage primaryStage) {
         setUpWindow(primaryStage);
         setLetsLynkButtonClick();
@@ -65,13 +66,13 @@ public class LetsLynkApplication extends Application {
         cityTwoInput.setPromptText("Muncie, IN");
         zipTwoInput.setPromptText("47304");
     }
-
+    // Build GUI
     private void setUpWindow(Stage primaryStage){
         primaryStage.setTitle("Let's-Lynk");
         primaryStage.setScene(new Scene(createWindow()));
         primaryStage.setOnCloseRequest(X -> Platform.exit());
     }
-
+    // Organize GUI
     public Parent createWindow() {
         VBox mainWindow = new VBox();
         HBox content = new HBox();
