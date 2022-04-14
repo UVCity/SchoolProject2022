@@ -25,19 +25,10 @@ public class LetsLynkApplication extends Application {
 
     // Input Fields
     private final TextField addressOneInput = new TextField();
-    private final TextField cityOneInput = new TextField();
-    private final TextField zipOneInput = new TextField();
     private final TextField addressTwoInput = new TextField();
-    private final TextField cityTwoInput = new TextField();
-    private final TextField zipTwoInput = new TextField();
 
     // Labels
-    private final Label addressOneLabel = new Label("User 1 Address");
-    private final Label cityOneLabel = new Label("User 1 City and State");
-    private final Label zipOneLabel = new Label("User 1 Zip");
-    private final Label addressTwoLabel = new Label("User 2 Address");
-    private final Label cityTwoLabel = new Label("User 2 City and State");
-    private final Label zipTwoLabel = new Label("User 2 Zip");
+    private final Label instructions = new Label("Please input your desired addresses in the following format \n 1615 West Riverside Avenue, Muncie, IN 47303");
     private final Label formattedAddress1 = new Label("");
     private final Label formattedAddress2 = new Label("");
     private final Label venue = new Label("");
@@ -59,12 +50,6 @@ public class LetsLynkApplication extends Application {
         setUpWindow(primaryStage);
         setLetsLynkButtonClick();
         primaryStage.show();
-        addressOneInput.setPromptText("1615 West Riverside Avenue");
-        cityOneInput.setPromptText("Muncie, IN");
-        zipOneInput.setPromptText("47303");
-        addressTwoInput.setPromptText("2800 North Tillotson Avenue");
-        cityTwoInput.setPromptText("Muncie, IN");
-        zipTwoInput.setPromptText("47304");
     }
     // Build GUI
     private void setUpWindow(Stage primaryStage){
@@ -80,6 +65,7 @@ public class LetsLynkApplication extends Application {
         VBox input2 = new VBox();
         mainWindow.getChildren().addAll(
                 letsLynkButton,
+                instructions,
                 content,
                 venue,
                 venueInfo,
@@ -90,22 +76,13 @@ public class LetsLynkApplication extends Application {
                 input2
         );
         input1.getChildren().addAll(
-                addressOneLabel,
-                addressOneInput,
-                cityOneLabel,
-                cityOneInput,
-                zipOneLabel,
-                zipOneInput
+                addressOneInput
         );
         input2.getChildren().addAll(
-                addressTwoLabel,
-                addressTwoInput,
-                cityTwoLabel,
-                cityTwoInput,
-                zipTwoLabel,
-                zipTwoInput
+                addressTwoInput
         );
         letsLynkButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        instructions.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         return mainWindow;
     }
 
