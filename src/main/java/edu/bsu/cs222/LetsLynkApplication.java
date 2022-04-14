@@ -20,6 +20,8 @@ import java.io.InputStream;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import static javafx.scene.text.TextAlignment.CENTER;
+
 
 public class LetsLynkApplication extends Application {
 
@@ -82,7 +84,7 @@ public class LetsLynkApplication extends Application {
                 addressTwoInput
         );
         letsLynkButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        instructions.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        instructions.setTextAlignment(CENTER);
         return mainWindow;
     }
 
