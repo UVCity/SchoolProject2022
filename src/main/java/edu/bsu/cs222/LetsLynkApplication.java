@@ -46,6 +46,7 @@ public class LetsLynkApplication extends Application {
     // Classes used
     AddressParser addressParser = new AddressParser();
     URLFormatter urlFormatter = new URLFormatter();
+    Coordinates locationData = new Coordinates();
 
     // Show GUI
     public void start(Stage primaryStage) {
@@ -122,7 +123,6 @@ public class LetsLynkApplication extends Application {
     private void useUserInput() {
         Platform.runLater(()-> {
             try {
-                Coordinates locationData = new Coordinates();
                 InputStream addressOneURL = urlFormatter.placeFromText(formattedAddress1.getText());
                 InputStream addressTwoURL = urlFormatter.placeFromText(formattedAddress2.getText());
 
