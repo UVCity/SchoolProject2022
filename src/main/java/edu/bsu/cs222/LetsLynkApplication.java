@@ -122,16 +122,17 @@ public class LetsLynkApplication extends Application {
     private void useUserInput() {
         Platform.runLater(()-> {
             try {
+                Coordinates locationData = new Coordinates();
                 InputStream addressOneURL = urlFormatter.placeFromText(formattedAddress1.getText());
                 InputStream addressTwoURL = urlFormatter.placeFromText(formattedAddress2.getText());
 
                 Double[] latLong1 = addressParser.parseLatitudeAndLongitude(addressOneURL);
                 Double[] latLong2 = addressParser.parseLatitudeAndLongitude(addressTwoURL);
-                Double[] avgLatLong = addressParser.returnAverage(latLong1, latLong2);
+                Double[] avgLatLong = locationData.coordinatesMidpoint(latLong1, latLong2);
 
                 InputStream venueURL1 = urlFormatter.placeNearSearch(avgLatLong[0], avgLatLong[1], "restaurant");
                 InputStream venueURL2 = urlFormatter.placeNearSearch(avgLatLong[0], avgLatLong[1], "restaurant");
-                InputStream venueURL3= urlFormatter.placeNearSearch(avgLatLong[0], avgLatLong[1], "restaurant");
+                InputStream venueURL3 = urlFormatter.placeNearSearch(avgLatLong[0], avgLatLong[1], "restaurant");
 
                 venue.setText(addressParser.parseVenueAddress(venueURL1));
                 venueInfo.setText(addressParser.parseName(venueURL2));
