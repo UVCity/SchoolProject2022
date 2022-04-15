@@ -6,9 +6,10 @@ import net.minidev.json.JSONArray;
 import java.io.InputStream;
 import java.io.IOException;
 
-
-
 public class AddressParser {
+    public Boolean parseResultStatus(InputStream testDataStream) throws IOException {                                   // Universal
+        return (JsonPath.read(testDataStream, "$..status").toString().equals("[\"OK\"]"));
+    }
     public String parseVenueAddress(InputStream testDataStream) throws IOException {                                    //nearBySearch Api
         JSONArray address = JsonPath.read(testDataStream, "$..vicinity");
         return address.get(0).toString();
