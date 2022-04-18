@@ -1,6 +1,6 @@
 package edu.bsu.cs222.model;
 
-import edu.bsu.cs222.AddressParser;
+import edu.bsu.cs222.Model.AddressParser;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -30,29 +30,5 @@ public class PlaceNearByTest {
         Double[] latitudeAndLongitude = parser.parseLatitudeAndLongitude(placeNearByStream);
         Assertions.assertEquals(40.189823, latitudeAndLongitude[0]);
         Assertions.assertEquals(-85.419575,latitudeAndLongitude[1]);
-    }
-    //________________U_R_L___T_E_S_T_I_N_G______________
-    @Test
-    public void parseUsersAverageLatitudeAndLongitudeFromURLTest() throws IOException {
-        InputStream userOneAddress = parser.placeFromText("1615 Riverside Avenue, 47303");
-        InputStream userTwoAddress = parser.placeFromText("2800 Tillotson Avenue 47304");
-        Double[] coordinatesA = parser.parseLatitudeAndLongitude(userOneAddress);
-        Double[] coordinatesB = parser.parseLatitudeAndLongitude(userTwoAddress);
-        Double[] coordinates = parser.returnAverage(coordinatesA, coordinatesB);
-
-        Assertions.assertEquals(40.208118150000004, coordinates[0]);
-        Assertions.assertEquals(-85.41264945, coordinates[1]);
-    }
-    @Test
-    public void parseVenueNearByFromURLTest() throws IOException {
-        InputStream place1 = parser.placeFromText("1615 Riverside Avenue 47303, Muncie IN");
-        InputStream place2 = parser.placeFromText("2800 Tillotson Avenue 47304, Muncie IN");
-        Double[] coordinatesA = parser.parseLatitudeAndLongitude(place1);
-        Double[] coordinatesB = parser.parseLatitudeAndLongitude(place2);
-        Double[] midPointLocation = parser.returnAverage(coordinatesA, coordinatesB);
-
-        InputStream venue = parser.placeNearSearch(midPointLocation[0],midPointLocation[1],"restaurant");
-        String address = parser.parseVenueAddress(venue);
-        Assertions.assertEquals("Ball State University North Dining 201, 1525 North McKinley Avenue, Muncie", address);
     }
 }
