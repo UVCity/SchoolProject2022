@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.IOException;
 
 public class AddressParser {
+
     public Boolean parseResultStatus(InputStream testDataStream) throws IOException {                                   // Universal
         return (JsonPath.read(testDataStream, "$..status").toString().equals("[\"OK\"]"));
     }
@@ -30,9 +31,5 @@ public class AddressParser {
         JSONArray distance = JsonPath.read(testDataStream, "$..distance.text");
         return distance.get(0).toString();
     }
-    public Double[] parseLatitudeAndLongitude(InputStream testDataStream) throws IOException {                          // Universal
-        JSONArray latitudeAndLongitude = JsonPath.read(testDataStream, "$..location[?(@.lat)]");
-        Coordinates locationData = new Coordinates();
-        return locationData.coordinateStringSplitter(latitudeAndLongitude.get(0).toString());
-    }
+
 }

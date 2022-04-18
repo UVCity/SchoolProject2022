@@ -25,10 +25,5 @@ public class PlaceNearByTest {
         String openValue = parser.parseHoursOfOperation(placeNearByStream);
         Assertions.assertEquals("true", openValue);
     }
-    @Test
-    public void parseVenueLatitudeAndLongitudeTest() throws IOException {
-        Double[] latitudeAndLongitude = parser.parseLatitudeAndLongitude(placeNearByStream);
-        Assertions.assertEquals(40.189823, latitudeAndLongitude[0]);
-        Assertions.assertEquals(-85.419575,latitudeAndLongitude[1]);
-    }
+
 }

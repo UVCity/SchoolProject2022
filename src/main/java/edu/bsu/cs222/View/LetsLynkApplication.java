@@ -129,8 +129,8 @@ public class LetsLynkApplication extends Application {
                 InputStream addressOneURL = urlFormatter.placeFromText(formattedAddress1.getText());
                 InputStream addressTwoURL = urlFormatter.placeFromText(formattedAddress2.getText());
 
-                Double[] latLong1 = addressParser.parseLatitudeAndLongitude(addressOneURL);
-                Double[] latLong2 = addressParser.parseLatitudeAndLongitude(addressTwoURL);
+                Double[] latLong1 = locationData.parseLatitudeAndLongitude(addressOneURL);
+                Double[] latLong2 = locationData.parseLatitudeAndLongitude(addressTwoURL);
                 Double[] avgLatLong = locationData.coordinatesMidpoint(latLong1, latLong2);
 
                 InputStream venueURL1 = urlFormatter.placeNearSearch(avgLatLong[0], avgLatLong[1], "restaurant");
