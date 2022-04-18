@@ -1,7 +1,10 @@
-package edu.bsu.cs222;
+package edu.bsu.cs222.View;
 
 
 
+import edu.bsu.cs222.Model.AddressParser;
+import edu.bsu.cs222.Model.Coordinates;
+import edu.bsu.cs222.Model.URLFormatter;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Parent;

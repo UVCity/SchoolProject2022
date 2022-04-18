@@ -1,4 +1,4 @@
-package edu.bsu.cs222;
+package edu.bsu.cs222.Model;
 
 public class Coordinates {
     public Double[] coordinatesMidpoint(Double[] coordinatesA, Double[] coordinatesB) {

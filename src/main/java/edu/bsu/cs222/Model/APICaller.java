@@ -1,4 +1,4 @@
-package edu.bsu.cs222;
+package edu.bsu.cs222.Model;
 
 import java.io.IOException;
 import java.io.InputStream;

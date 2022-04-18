@@ -1,6 +1,6 @@
 package edu.bsu.cs222.model;
 
-import edu.bsu.cs222.AddressParser;
+import edu.bsu.cs222.Model.AddressParser;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

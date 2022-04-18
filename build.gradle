@@ -10,7 +10,7 @@ javafx {
 }
 
 application{
-    mainClassName = 'edu.bsu.cs222.LetsLynkApplication'
+    mainClassName = 'edu.bsu.cs222.View.LetsLynkApplication'
 }
 
 group 'org.example'
