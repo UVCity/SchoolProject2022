@@ -15,9 +15,27 @@ public class CoordinatesTest {
 
 
     @Test
-    public void parseVenueLatitudeAndLongitudeTest() throws IOException {
-        Double[] latitudeAndLongitude = locationData.parseLatitudeAndLongitude(placeNearByStream);
-        Assertions.assertEquals(40.189823, latitudeAndLongitude[0]);
-        Assertions.assertEquals(-85.419575,latitudeAndLongitude[1]);
+    public void parseLatitudeTest() throws IOException {
+        locationData.parseLatitude(placeNearByStream);
+        Assertions.assertEquals(40.189823, locationData.getLat());
+    }
+
+    @Test
+    public void parseLongitudeTest() throws IOException {
+        locationData.parseLongitude(placeNearByStream);
+        Assertions.assertEquals(-85.419575,locationData.getLng());
+    }
+
+    @Test
+    public void coordinatesMidpointTest() {
+        Coordinates c1 = new Coordinates();
+        Coordinates c2 = new Coordinates();
+        c1.setLat(50.0);
+        c1.setLng(100.0);
+        c2.setLat(0.0);
+        c2.setLng(0.0);
+        locationData.coordinatesMidpoint(c1, c2);
+        Assertions.assertEquals(25.0 ,locationData.getLat());
+        Assertions.assertEquals(50.0, locationData.getLng());
     }
 }

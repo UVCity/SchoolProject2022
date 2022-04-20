@@ -23,8 +23,8 @@ public class AddressParser {
         JSONArray name = JsonPath.read(testDataStream, "$..name");
         return name.get(0).toString();
     }
-    public String parseHoursOfOperation(InputStream testDataStream) throws IOException {                               //nearBySearch Api
-        JSONArray openValue = JsonPath.read(testDataStream, "$..open_now");
+    public String parseHoursOfOperation(InputStream venueUrl) throws IOException {                               //nearBySearch Api
+        JSONArray openValue = JsonPath.read(venueUrl, "$..open_now");
         return openValue.get(0).toString();
     }
     public String parseDistanceToAddress(InputStream testDataStream) throws IOException {                               //Directions Api

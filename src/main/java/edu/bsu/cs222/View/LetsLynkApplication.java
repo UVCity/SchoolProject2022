@@ -2,6 +2,7 @@ package edu.bsu.cs222.View;
 
 
 
+import edu.bsu.cs222.Model.AddressFactory;
 import edu.bsu.cs222.Model.AddressParser;
 import edu.bsu.cs222.Model.Coordinates;
 import edu.bsu.cs222.Model.URLFormatter;
@@ -34,8 +35,6 @@ public class LetsLynkApplication extends Application {
 
     // Labels
     private final Label instructions = new Label("Please input your desired addresses in the following format \n 1615 West Riverside Avenue, Muncie, IN 47303");
-    private final Label formattedAddress1 = new Label("");
-    private final Label formattedAddress2 = new Label("");
     private final Label venue = new Label("");
     private final Label venueInfo = new Label("");
     private final Label venueOpenValue = new Label("");
@@ -46,10 +45,12 @@ public class LetsLynkApplication extends Application {
     // Executors
     private final Executor letsLynkExecutor = Executors.newSingleThreadExecutor();
 
-    // Classes used
+    // Objects
     AddressParser addressParser = new AddressParser();
     URLFormatter urlFormatter = new URLFormatter();
     Coordinates locationData = new Coordinates();
+    AddressFactory address1 = new AddressFactory();
+    AddressFactory address2 = new AddressFactory();
 
     // Show GUI
     public void start(Stage primaryStage) {
@@ -57,12 +58,14 @@ public class LetsLynkApplication extends Application {
         setLetsLynkButtonClick();
         primaryStage.show();
     }
+
     // Build GUI
-    private void setUpWindow(Stage primaryStage){
+    private void setUpWindow(Stage primaryStage) {
         primaryStage.setTitle("Let's-Lynk");
         primaryStage.setScene(new Scene(createWindow()));
         primaryStage.setOnCloseRequest(X -> Platform.exit());
     }
+
     // Organize GUI
     public Parent createWindow() {
         VBox mainWindow = new VBox();
@@ -93,59 +96,59 @@ public class LetsLynkApplication extends Application {
     }
 
 
-    private void setLetsLynkButtonClick(){
+    private void setLetsLynkButtonClick() {
         letsLynkButton.setOnAction((event) -> {
             letsLynkButton.setDisable(true);
 
-            letsLynkExecutor.execute(()->{
-                intakeUserInput();
-                useUserInput();
+            letsLynkExecutor.execute(() -> {
+                address1.formatUserInput(addressOneInput.getText());
+                address2.formatUserInput(addressTwoInput.getText());
+                address1.parseCoordinates(address1.getUrl());
+                address2.parseCoordinates(address2.getUrl());
+                locationData.coordinatesMidpoint(address1.getCoordinates(), address2.getCoordinates());
+                try {
+                    urlFormatter.placeNearSearch(locationData.getLat(), locationData.getLng(), "restaurant");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                updateVenueAddress(urlFormatter.getVenueUrl());
+                updateVenueName(urlFormatter.getVenueUrl());
+                updateVenueHours(urlFormatter.getVenueUrl());
+
                 letsLynkButton.setDisable(false);
             });
         });
     }
 
 
-
-    private void intakeUserInput() {
+    private void updateVenueAddress(InputStream venueUrl) {
         Platform.runLater(()-> {
-            try {
-                InputStream address1Comparison = urlFormatter.placeFromText(addressOneInput.getText());
-                String address1Print = addressParser.parseUserAddress(address1Comparison);
-                formattedAddress1.setText(address1Print);
+        try {
+            venue.setText(addressParser.parseVenueAddress(venueUrl));
 
-                InputStream address2Comparison = urlFormatter.placeFromText(addressTwoInput.getText());
-                String address2Print = addressParser.parseUserAddress(address2Comparison);
-                formattedAddress2.setText(address2Print);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    });
+    }
+
+    private void updateVenueHours(InputStream venueUrl) {
+        Platform.runLater(() -> {
+            try {
+                venueOpenValue.setText("This venue is open: " + addressParser.parseHoursOfOperation(venueUrl));
             } catch (IOException e) {
                 e.printStackTrace();
             }
         });
     }
 
-    private void useUserInput() {
+    private void updateVenueName(InputStream venueUrl) {
         Platform.runLater(()-> {
-            try {
-                InputStream addressOneURL = urlFormatter.placeFromText(formattedAddress1.getText());
-                InputStream addressTwoURL = urlFormatter.placeFromText(formattedAddress2.getText());
-
-                Double[] latLong1 = locationData.parseLatitudeAndLongitude(addressOneURL);
-                Double[] latLong2 = locationData.parseLatitudeAndLongitude(addressTwoURL);
-                Double[] avgLatLong = locationData.coordinatesMidpoint(latLong1, latLong2);
-
-                InputStream venueURL1 = urlFormatter.placeNearSearch(avgLatLong[0], avgLatLong[1], "restaurant");
-                InputStream venueURL2 = urlFormatter.placeNearSearch(avgLatLong[0], avgLatLong[1], "restaurant");
-                InputStream venueURL3 = urlFormatter.placeNearSearch(avgLatLong[0], avgLatLong[1], "restaurant");
-
-                venue.setText(addressParser.parseVenueAddress(venueURL1));
-                venueInfo.setText(addressParser.parseName(venueURL2));
-                venueOpenValue.setText("This venue is open: " + addressParser.parseHoursOfOperation(venueURL3));
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+        try{
+            venueInfo.setText(addressParser.parseName(venueUrl));
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    });
     }
-
-
 }
