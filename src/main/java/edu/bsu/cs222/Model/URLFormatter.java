@@ -22,12 +22,6 @@ public class URLFormatter {
         String urlString = String.format("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%s&rankby=distance&type=%s&formatted_address&key=%s",formatter, "restaurant", keyReader.key());
         venueUrl = APIcaller.tryCatch(urlString);
     }
-    public InputStream directionsAndDistance( String placeFrom , String placeTo) throws IOException {
-        String from = URLEncoder.encode(placeFrom, Charset.defaultCharset());
-        String to = URLEncoder.encode(placeTo, Charset.defaultCharset());
-        String urlString = String.format("https://maps.googleapis.com/maps/api/directions/json?origin=%s&destination=%s&key=%s" ,from, to, keyReader.key());
-        return APIcaller.tryCatch(urlString);
-    }
 
     public InputStream getVenueUrl() {
         return venueUrl;
