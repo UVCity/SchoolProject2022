@@ -107,7 +107,7 @@ public class LetsLynkApplication extends Application {
                 address2.parseCoordinates(address2.getUrl());
                 locationData.coordinatesMidpoint(address1.getCoordinates(), address2.getCoordinates());
                 try {
-                    urlFormatter.placeNearSearch(locationData.getLat(), locationData.getLng(), "restaurant");
+                    urlFormatter.placeNearSearch(locationData.getLat(), locationData.getLng());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
