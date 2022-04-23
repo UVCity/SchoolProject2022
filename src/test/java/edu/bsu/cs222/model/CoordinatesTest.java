@@ -15,14 +15,9 @@ public class CoordinatesTest {
 
 
     @Test
-    public void parseLatitudeTest() throws IOException {
-        locationData.parseLatitude(placeNearByStream);
+    public void parseLatLngTest() throws IOException {
+        locationData.parseLatLng(placeNearByStream);
         Assertions.assertEquals(40.189823, locationData.getLat());
-    }
-
-    @Test
-    public void parseLongitudeTest() throws IOException {
-        locationData.parseLongitude(placeNearByStream);
         Assertions.assertEquals(-85.419575,locationData.getLng());
     }
 

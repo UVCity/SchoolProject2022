@@ -10,23 +10,24 @@ import java.io.InputStream;
 
 public class AddressParserTest {
     private final InputStream placeFromTextStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("FindPlaceFromTextData.json");
+    private final InputStream placeNearByStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("PlaceNearBySearchData.json");
     private final AddressParser parser = new AddressParser();
     private final Coordinates locationData = new Coordinates();
 
+
     @Test
-    void parseAddressValidation() throws IOException {
-        boolean result = parser.parseResultStatus(placeFromTextStream);
-        Assertions.assertTrue(result);
+    public void parseVenueAddressTest() throws IOException {
+        String address = parser.parseVenueAddress(placeNearByStream);
+        Assertions.assertEquals("523 South Tillotson Avenue, Muncie",address);
     }
     @Test
-    public void parseUserAddressTest() throws IOException {
-        String address = parser.parseUserAddress(placeFromTextStream);
-        Assertions.assertEquals("2720 W Jackson St, Muncie, IN 47303, USA", address);
+    public void parseVenueHoursOfOperationTest() throws IOException {
+        String openValue = parser.parseHoursOfOperation(placeNearByStream);
+        Assertions.assertEquals("true", openValue);
     }
     @Test
-    public void parseUserLatitudeAndLongitudeTest() throws IOException {
-        Double[] latitudeAndLongitude = locationData.parseLatitudeAndLongitude(placeFromTextStream);
-        Assertions.assertEquals(40.1934735, latitudeAndLongitude[0]);
-        Assertions.assertEquals(-85.4186142, latitudeAndLongitude[1]);
+    public void parseVenueNameTest() throws IOException {
+        String name = parser.parseName(placeNearByStream);
+        Assertions.assertEquals("Starbucks",name);
     }
 }

@@ -8,15 +8,8 @@ import java.io.IOException;
 
 public class AddressParser {
 
-    public Boolean parseResultStatus(InputStream testDataStream) throws IOException {                                   // Universal
-        return (JsonPath.read(testDataStream, "$..status").toString().equals("[\"OK\"]"));
-    }
     public String parseVenueAddress(InputStream testDataStream) throws IOException {                                    //nearBySearch Api
         JSONArray address = JsonPath.read(testDataStream, "$..vicinity");
-        return address.get(0).toString();
-    }
-    public String parseUserAddress(InputStream testDataStream) throws IOException {                                     //placeFromText Api
-        JSONArray address = JsonPath.read(testDataStream, "$..formatted_address");
         return address.get(0).toString();
     }
     public String parseName(InputStream testDataStream) throws IOException {                                           //nearBySearch Api
@@ -27,9 +20,6 @@ public class AddressParser {
         JSONArray openValue = JsonPath.read(venueUrl, "$..open_now");
         return openValue.get(0).toString();
     }
-    public String parseDistanceToAddress(InputStream testDataStream) throws IOException {                               //Directions Api
-        JSONArray distance = JsonPath.read(testDataStream, "$..distance.text");
-        return distance.get(0).toString();
-    }
+
 
 }
