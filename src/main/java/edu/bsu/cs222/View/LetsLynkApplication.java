@@ -16,9 +16,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import net.minidev.json.parser.ParseException;
 
 import java.io.IOException;
-import java.io.InputStream;
 
 
 import java.util.concurrent.Executor;
@@ -111,9 +111,14 @@ public class LetsLynkApplication extends Application {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                updateVenueAddress(urlFormatter.getVenueUrl());
-                updateVenueName(urlFormatter.getVenueUrl());
-                updateVenueHours(urlFormatter.getVenueUrl());
+                try {
+                    addressParser.createJsonObject(urlFormatter.getVenueUrl());
+                } catch (IOException | ParseException e) {
+                    e.printStackTrace();
+                }
+                updateVenueAddress();
+                updateVenueName();
+                updateVenueHours();
 
                 letsLynkButton.setDisable(false);
             });
@@ -121,10 +126,10 @@ public class LetsLynkApplication extends Application {
     }
 
 
-    private void updateVenueAddress(InputStream venueUrl) {
+    private void updateVenueAddress() {
         Platform.runLater(()-> {
         try {
-            venue.setText(addressParser.parseVenueAddress(venueUrl));
+            venue.setText(addressParser.parseVenueAddress());
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -132,20 +137,20 @@ public class LetsLynkApplication extends Application {
     });
     }
 
-    private void updateVenueHours(InputStream venueUrl) {
+    private void updateVenueHours() {
         Platform.runLater(() -> {
             try {
-                venueOpenValue.setText("This venue is open: " + addressParser.parseHoursOfOperation(venueUrl));
+                venueOpenValue.setText("This venue is open: " + addressParser.parseHoursOfOperation());
             } catch (IOException e) {
                 e.printStackTrace();
             }
         });
     }
 
-    private void updateVenueName(InputStream venueUrl) {
+    private void updateVenueName() {
         Platform.runLater(()-> {
         try{
-            venueInfo.setText(addressParser.parseName(venueUrl));
+            venueInfo.setText(addressParser.parseName());
         } catch (IOException e){
             e.printStackTrace();
         }
