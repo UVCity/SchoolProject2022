@@ -116,44 +116,25 @@ public class LetsLynkApplication extends Application {
                 } catch (IOException | ParseException e) {
                     e.printStackTrace();
                 }
-                updateVenueAddress();
-                updateVenueName();
-                updateVenueHours();
-
+                Platform.runLater(()-> {
+                            try {
+                                venue.setText(addressParser.parseVenueAddress());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            try {
+                                venueOpenValue.setText("This venue is open: " + addressParser.parseHoursOfOperation());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            try {
+                                venueInfo.setText(addressParser.parseName());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        });
                 letsLynkButton.setDisable(false);
             });
         });
-    }
-
-
-    private void updateVenueAddress() {
-        Platform.runLater(()-> {
-        try {
-            venue.setText(addressParser.parseVenueAddress());
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    });
-    }
-
-    private void updateVenueHours() {
-        Platform.runLater(() -> {
-            try {
-                venueOpenValue.setText("This venue is open: " + addressParser.parseHoursOfOperation());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-    }
-
-    private void updateVenueName() {
-        Platform.runLater(()-> {
-        try{
-            venueInfo.setText(addressParser.parseName());
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-    });
     }
 }
