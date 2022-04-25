@@ -18,10 +18,10 @@ public class Coordinates {
         coordinateSplitter(latLng.get(0).toString());
     }
 
-    public void coordinateSplitter(String coordiantes) {
-        String lat = coordiantes.replace("{lat=", "");
+    public void coordinateSplitter(String coordinates) {
+        String lat = coordinates.replace("{lat=", "");
         String latitude = (lat.split(",")[0]);
-        String lng = coordiantes.replace("}", "");
+        String lng = coordinates.replace("}", "");
         String longitude = (lng.split("lng=")[1]);
         setLatitude(Double.parseDouble(latitude));
         setLongitude(Double.parseDouble(longitude));
