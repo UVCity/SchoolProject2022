@@ -1,34 +1,39 @@
 package edu.bsu.cs222.model;
 
 import edu.bsu.cs222.Model.AddressParser;
+import net.minidev.json.parser.ParseException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
 
-public class PlaceNearByTest {
+public class AddressParserTest {
     private final InputStream placeNearByStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("PlaceNearBySearchData.json");
     private final AddressParser parser = new AddressParser();
+
+    {
+        try {
+            parser.createJsonObject(placeNearByStream);
+        } catch (IOException | ParseException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+
     @Test
     public void parseVenueAddressTest() throws IOException {
-        String address = parser.parseVenueAddress(placeNearByStream);
+        String address = parser.parseVenueAddress();
         Assertions.assertEquals("523 South Tillotson Avenue, Muncie",address);
     }
     @Test
-    public void parseVenueNameTest() throws IOException {
-        String name = parser.parseName(placeNearByStream);
-        Assertions.assertEquals("Starbucks",name);
-    }
-    @Test
     public void parseVenueHoursOfOperationTest() throws IOException {
-        String openValue = parser.parseHoursOfOperation(placeNearByStream);
+        String openValue = parser.parseHoursOfOperation();
         Assertions.assertEquals("true", openValue);
     }
     @Test
-    public void parseVenueLatitudeAndLongitudeTest() throws IOException {
-        Double[] latitudeAndLongitude = parser.parseLatitudeAndLongitude(placeNearByStream);
-        Assertions.assertEquals(40.189823, latitudeAndLongitude[0]);
-        Assertions.assertEquals(-85.419575,latitudeAndLongitude[1]);
+    public void parseVenueNameTest() throws IOException {
+        String name = parser.parseName();
+        Assertions.assertEquals("Starbucks",name);
     }
 }
