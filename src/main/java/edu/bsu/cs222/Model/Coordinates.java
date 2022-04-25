@@ -2,16 +2,12 @@ package edu.bsu.cs222.Model;
 
 import com.jayway.jsonpath.JsonPath;
 import net.minidev.json.JSONArray;
-
-
 import java.io.IOException;
 import java.io.InputStream;
 
 public class Coordinates {
     private Double latitude;
     private Double longitude;
-
-
 
     public void parseLatLng(InputStream input) throws IOException {
         JSONArray latLng = JsonPath.read(input, "$..location[?(@.lat)]");
@@ -47,5 +43,4 @@ public class Coordinates {
         this.latitude = ((coordinate1.getLatitude() + coordinate2.getLatitude()) / 2);
         this.longitude = ((coordinate1.getLongitude() + coordinate2.getLongitude()) / 2);
     }
-
 }

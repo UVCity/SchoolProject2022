@@ -7,7 +7,9 @@ import java.net.URL;
 import java.net.URLConnection;
 
 public class InternetConnection {
+
     public InputStream URLRequest(String urlString)throws IOException {
+
         try {
             URL url = new URL(urlString);
             URLConnection connection = url.openConnection();

@@ -3,10 +3,8 @@ package edu.bsu.cs222.Model;
 import java.io.IOException;
 import java.io.InputStream;
 
-
 public class AddressHandler {
     private InputStream addressUrl;
-
     private final URLFormatter urlFormatter = new URLFormatter();
     private final Coordinates coordinates = new Coordinates();
 
@@ -34,9 +32,7 @@ public class AddressHandler {
         }
     }
 
-
     public Coordinates getCoordinates () {
         return this.coordinates;
     }
-
 }

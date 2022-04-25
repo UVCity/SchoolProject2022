@@ -1,7 +1,5 @@
 package edu.bsu.cs222.View;
 
-
-
 import edu.bsu.cs222.Model.AddressHandler;
 import edu.bsu.cs222.Model.AddressParser;
 import edu.bsu.cs222.Model.Coordinates;
@@ -18,15 +16,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import net.minidev.json.parser.ParseException;
-
 import java.io.IOException;
-
-
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-
 import static javafx.scene.text.TextAlignment.CENTER;
-
 
 public class LetsLynkApplication extends Application {
 
@@ -93,15 +86,12 @@ public class LetsLynkApplication extends Application {
         );
         mainWindow.setAlignment(Pos.CENTER);
         content.setAlignment(Pos.CENTER);
-        addressOneInput.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        addressTwoInput.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         instructions.setTextAlignment(CENTER);
         venue.setTextAlignment(CENTER);
         venueInfo.setTextAlignment(CENTER);
         venueOpenValue.setTextAlignment(CENTER);
         return mainWindow;
     }
-
 
     private void setLetsLynkButtonClick() {
         goButton.setOnAction((event) -> {
