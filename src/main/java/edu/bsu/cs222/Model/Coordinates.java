@@ -8,8 +8,8 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class Coordinates {
-    private Double lat;
-    private Double lng;
+    private Double latitude;
+    private Double longitude;
 
 
 
@@ -23,29 +23,29 @@ public class Coordinates {
         String latitude = (lat.split(",")[0]);
         String lng = coordiantes.replace("}", "");
         String longitude = (lng.split("lng=")[1]);
-        setLat(Double.parseDouble(latitude));
-        setLng(Double.parseDouble(longitude));
+        setLatitude(Double.parseDouble(latitude));
+        setLongitude(Double.parseDouble(longitude));
     }
 
-    public Double getLat() {
-        return lat;
+    public Double getLatitude() {
+        return latitude;
     }
 
-    public Double getLng() {
-        return lng;
+    public Double getLongitude() {
+        return longitude;
     }
 
-    public void setLat(Double input) {
-        this.lat = input;
+    public void setLatitude(Double input) {
+        this.latitude = input;
     }
 
-    public void setLng(Double input) {
-        this.lng = input;
+    public void setLongitude(Double input) {
+        this.longitude = input;
     }
 
-    public void coordinatesMidpoint(Coordinates c1, Coordinates c2){
-        this.lat = ((c1.getLat() + c2.getLat()) / 2);
-        this.lng = ((c1.getLng() + c2.getLng()) / 2);
+    public void findCoordinatesMidpoint(Coordinates coordinate1, Coordinates coordinate2){
+        this.latitude = ((coordinate1.getLatitude() + coordinate2.getLatitude()) / 2);
+        this.longitude = ((coordinate1.getLongitude() + coordinate2.getLongitude()) / 2);
     }
 
 }

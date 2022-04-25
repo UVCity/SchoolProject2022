@@ -2,12 +2,13 @@ package edu.bsu.cs222.View;
 
 
 
-import edu.bsu.cs222.Model.AddressFactory;
+import edu.bsu.cs222.Model.AddressHandler;
 import edu.bsu.cs222.Model.AddressParser;
 import edu.bsu.cs222.Model.Coordinates;
 import edu.bsu.cs222.Model.URLFormatter;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -34,13 +35,13 @@ public class LetsLynkApplication extends Application {
     private final TextField addressTwoInput = new TextField();
 
     // Labels
-    private final Label instructions = new Label("Please input your desired addresses in the following format \n 1615 West Riverside Avenue, Muncie, IN 47303");
+    private final Label instructions = new Label("Please input one address per field using the following format \n 1615 West Riverside Avenue, Muncie, IN 47303");
     private final Label venue = new Label("");
     private final Label venueInfo = new Label("");
     private final Label venueOpenValue = new Label("");
 
     // Buttons
-    private final Button letsLynkButton = new Button("Let's Lynk!");
+    private final Button goButton = new Button("Go!");
 
     // Executors
     private final Executor letsLynkExecutor = Executors.newSingleThreadExecutor();
@@ -49,8 +50,8 @@ public class LetsLynkApplication extends Application {
     AddressParser addressParser = new AddressParser();
     URLFormatter urlFormatter = new URLFormatter();
     Coordinates locationData = new Coordinates();
-    AddressFactory address1 = new AddressFactory();
-    AddressFactory address2 = new AddressFactory();
+    AddressHandler address1 = new AddressHandler();
+    AddressHandler address2 = new AddressHandler();
 
     // Show GUI
     public void start(Stage primaryStage) {
@@ -73,9 +74,9 @@ public class LetsLynkApplication extends Application {
         VBox input1 = new VBox();
         VBox input2 = new VBox();
         mainWindow.getChildren().addAll(
-                letsLynkButton,
                 instructions,
                 content,
+                goButton,
                 venue,
                 venueInfo,
                 venueOpenValue
@@ -90,24 +91,30 @@ public class LetsLynkApplication extends Application {
         input2.getChildren().addAll(
                 addressTwoInput
         );
-        letsLynkButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        mainWindow.setAlignment(Pos.CENTER);
+        content.setAlignment(Pos.CENTER);
+        addressOneInput.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        addressTwoInput.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         instructions.setTextAlignment(CENTER);
+        venue.setTextAlignment(CENTER);
+        venueInfo.setTextAlignment(CENTER);
+        venueOpenValue.setTextAlignment(CENTER);
         return mainWindow;
     }
 
 
     private void setLetsLynkButtonClick() {
-        letsLynkButton.setOnAction((event) -> {
-            letsLynkButton.setDisable(true);
+        goButton.setOnAction((event) -> {
+            goButton.setDisable(true);
 
             letsLynkExecutor.execute(() -> {
                 address1.formatUserInput(addressOneInput.getText());
                 address2.formatUserInput(addressTwoInput.getText());
                 address1.parseCoordinates(address1.getUrl());
                 address2.parseCoordinates(address2.getUrl());
-                locationData.coordinatesMidpoint(address1.getCoordinates(), address2.getCoordinates());
+                locationData.findCoordinatesMidpoint(address1.getCoordinates(), address2.getCoordinates());
                 try {
-                    urlFormatter.placeNearSearch(locationData.getLat(), locationData.getLng());
+                    urlFormatter.createVenueAddressURL(locationData.getLatitude(), locationData.getLongitude());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -133,7 +140,7 @@ public class LetsLynkApplication extends Application {
                                 e.printStackTrace();
                             }
                         });
-                letsLynkButton.setDisable(false);
+                goButton.setDisable(false);
             });
         });
     }

@@ -7,20 +7,20 @@ import java.nio.charset.Charset;
 
 
 public class URLFormatter {
-    InputStream venueUrl;
 
-    APICaller APIcaller = new APICaller();
+    InputStream venueUrl;
+    InternetConnection internetConnection = new InternetConnection();
     KeyReader keyReader = new KeyReader();
 
-    public InputStream placeFromText(String address) throws IOException {
+    public InputStream createUserAddressURL(String address) throws IOException {
         String encodedUrlString = URLEncoder.encode(address, Charset.defaultCharset());
         String urlString = String.format("https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=%s&inputtype=textquery&fields=formatted_address%%2Cgeometry&key=%s",encodedUrlString , keyReader.key());
-        return APIcaller.tryCatch(urlString);
+        return internetConnection.URLRequest(urlString);
     }
-    public void placeNearSearch(Double latitude, Double longitude) throws IOException {
+    public void createVenueAddressURL(Double latitude, Double longitude) throws IOException {
         String formatter = String.format("%f%%2C%f",latitude, longitude);
         String urlString = String.format("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%s&rankby=distance&type=%s&formatted_address&key=%s",formatter, "restaurant", keyReader.key());
-        venueUrl = APIcaller.tryCatch(urlString);
+        this.venueUrl = internetConnection.URLRequest(urlString);
     }
 
     public InputStream getVenueUrl() {

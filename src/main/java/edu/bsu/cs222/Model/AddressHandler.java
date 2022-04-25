@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 
-public class AddressFactory {
+public class AddressHandler {
     private InputStream addressUrl;
 
     private final URLFormatter urlFormatter = new URLFormatter();
@@ -20,7 +20,7 @@ public class AddressFactory {
 
     public void formatUserInput(String userAddress) {
         try {
-            setUrl(urlFormatter.placeFromText(userAddress));
+            setUrl(urlFormatter.createUserAddressURL(userAddress));
         } catch (IOException e) {
             e.printStackTrace();
         }

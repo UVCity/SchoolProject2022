@@ -11,7 +11,6 @@ import java.io.InputStream;
 public class AddressParserTest {
     private final InputStream placeNearByStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("PlaceNearBySearchData.json");
     private final AddressParser parser = new AddressParser();
-
     {
         try {
             parser.createJsonObject(placeNearByStream);
@@ -19,7 +18,6 @@ public class AddressParserTest {
             ex.printStackTrace();
         }
     }
-
 
     @Test
     public void parseVenueAddressTest() throws IOException {
