@@ -124,7 +124,11 @@ public class LetsLynkApplication extends Application {
                                 e.printStackTrace();
                             }
                             try {
-                                venueOpenValue.setText("This venue is open: " + addressParser.parseHoursOfOperation());
+                                if (addressParser.parseHoursOfOperation().equals("true")){
+                                    venueOpenValue.setText("This venue is open!");
+                                } else {
+                                    venueOpenValue.setText("This venue is closed!");
+                                }
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
