@@ -30,6 +30,8 @@ public class LetsLynkApplication extends Application {
     // Labels
     private final Label instructions = new Label("Please input one address per field using the following format \n 1615 West Riverside Avenue, Muncie, IN 47303");
     private final Label venue = new Label("");
+    private final Label address1Label = new Label("Address 1:");
+    private final Label address2Label = new Label("Address 2:");
     private final Label venueInfo = new Label("");
     private final Label venueOpenValue = new Label("");
 
@@ -79,9 +81,11 @@ public class LetsLynkApplication extends Application {
                 input2
         );
         input1.getChildren().addAll(
+                address1Label,
                 addressOneInput
         );
         input2.getChildren().addAll(
+                address2Label,
                 addressTwoInput
         );
         mainWindow.setAlignment(Pos.CENTER);
