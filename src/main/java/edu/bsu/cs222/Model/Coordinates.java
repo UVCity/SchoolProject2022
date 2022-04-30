@@ -25,22 +25,6 @@ public class Coordinates {
         this.longitude = parseDouble(longitude);
     }
 
-    public Double getLatitude() {
-        return latitude;
-    }
-
-    public Double getLongitude() {
-        return longitude;
-    }
-
-    public void setLatitude(Double input) {
-        this.latitude = input;
-    }
-
-    public void setLongitude(Double input) {
-        this.longitude = input;
-    }
-
     public void findCoordinatesMidpoint(Coordinates coordinate1, Coordinates coordinate2){
         this.latitude = ((coordinate1.latitude + coordinate2.latitude) / 2);
         this.longitude = ((coordinate1.longitude + coordinate2.longitude) / 2);

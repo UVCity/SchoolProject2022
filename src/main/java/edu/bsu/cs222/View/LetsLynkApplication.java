@@ -108,7 +108,7 @@ public class LetsLynkApplication extends Application {
                 address2.parseCoordinates(address2.getUrl());
                 locationData.findCoordinatesMidpoint(address1.getCoordinates(), address2.getCoordinates());
                 try {
-                    urlFormatter.createVenueAddressURL(locationData.getLatitude(), locationData.getLongitude());
+                    urlFormatter.createVenueAddressURL(locationData.latitude, locationData.longitude);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
