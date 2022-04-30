@@ -8,8 +8,8 @@ import java.io.InputStream;
 import static java.lang.Double.parseDouble;
 
 public class Coordinates {
-    private Double latitude;
-    private Double longitude;
+    public Double latitude;
+    public Double longitude;
 
     public void parseLatLng(InputStream input) throws IOException {
         JSONArray latLng = JsonPath.read(input, "$..location[?(@.lat)]");

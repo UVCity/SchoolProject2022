@@ -22,12 +22,12 @@ public class CoordinatesTest {
     public void coordinatesMidpointTest() {
         Coordinates c1 = new Coordinates();
         Coordinates c2 = new Coordinates();
-        c1.setLatitude(50.0);
-        c1.setLongitude(100.0);
-        c2.setLatitude(0.0);
-        c2.setLongitude(0.0);
+        c1.latitude = 50.0;
+        c1.longitude = 100.0;
+        c2.latitude = 0.0;
+        c2.longitude = 0.0;
         locationData.findCoordinatesMidpoint(c1, c2);
-        Assertions.assertEquals(25.0 ,locationData.getLatitude());
-        Assertions.assertEquals(50.0, locationData.getLongitude());
+        Assertions.assertEquals(25.0 ,locationData.latitude);
+        Assertions.assertEquals(50.0, locationData.longitude);
     }
 }
