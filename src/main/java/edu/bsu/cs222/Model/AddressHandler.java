@@ -3,10 +3,8 @@ package edu.bsu.cs222.Model;
 import java.io.IOException;
 import java.io.InputStream;
 
-
-public class AddressFactory {
+public class AddressHandler {
     private InputStream addressUrl;
-
     private final URLFormatter urlFormatter = new URLFormatter();
     private final Coordinates coordinates = new Coordinates();
 
@@ -20,7 +18,7 @@ public class AddressFactory {
 
     public void formatUserInput(String userAddress) {
         try {
-            setUrl(urlFormatter.placeFromText(userAddress));
+            setUrl(urlFormatter.createUserAddressURL(userAddress));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -34,9 +32,7 @@ public class AddressFactory {
         }
     }
 
-
     public Coordinates getCoordinates () {
         return this.coordinates;
     }
-
 }

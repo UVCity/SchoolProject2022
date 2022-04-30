@@ -6,8 +6,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
-public class APICaller {
-    public InputStream tryCatch(String urlString)throws IOException {
+public class InternetConnection {
+
+    public InputStream URLRequest(String urlString)throws IOException {
+
         try {
             URL url = new URL(urlString);
             URLConnection connection = url.openConnection();
