@@ -19,7 +19,7 @@ public class CoordinatesTest {
     }
 
     @Test
-    public void coordinatesMidpointTest() {
+    public void findCoordinatesMidpointTest() {
         Coordinates c1 = new Coordinates();
         Coordinates c2 = new Coordinates();
         c1.latitude = 50.0;
@@ -29,5 +29,9 @@ public class CoordinatesTest {
         locationData.findCoordinatesMidpoint(c1, c2);
         Assertions.assertEquals(25.0 ,locationData.latitude);
         Assertions.assertEquals(50.0, locationData.longitude);
+    }
+    @Test
+    public void splitCoordinatesTest(){
+
     }
 }

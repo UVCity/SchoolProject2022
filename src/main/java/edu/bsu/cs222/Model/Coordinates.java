@@ -13,10 +13,10 @@ public class Coordinates {
 
     public void parseLatLng(InputStream input) throws IOException {
         JSONArray latLng = JsonPath.read(input, "$..location[?(@.lat)]");
-        coordinateSplitter(latLng.get(0).toString());
+        splitCoordinates(latLng.get(0).toString());
     }
 
-    public void coordinateSplitter(String coordinates) {
+    private void splitCoordinates(String coordinates) {
         String lat = coordinates.replace("{lat=", "");
         String latitude = (lat.split(",")[0]);
         String lng = coordinates.replace("}", "");
