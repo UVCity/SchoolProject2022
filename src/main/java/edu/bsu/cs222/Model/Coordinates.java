@@ -5,6 +5,8 @@ import net.minidev.json.JSONArray;
 import java.io.IOException;
 import java.io.InputStream;
 
+import static java.lang.Double.parseDouble;
+
 public class Coordinates {
     private Double latitude;
     private Double longitude;
@@ -19,8 +21,8 @@ public class Coordinates {
         String latitude = (lat.split(",")[0]);
         String lng = coordinates.replace("}", "");
         String longitude = (lng.split("lng=")[1]);
-        setLatitude(Double.parseDouble(latitude));
-        setLongitude(Double.parseDouble(longitude));
+        this.latitude = parseDouble(latitude);
+        this.longitude = parseDouble(longitude);
     }
 
     public Double getLatitude() {
@@ -40,7 +42,7 @@ public class Coordinates {
     }
 
     public void findCoordinatesMidpoint(Coordinates coordinate1, Coordinates coordinate2){
-        this.latitude = ((coordinate1.getLatitude() + coordinate2.getLatitude()) / 2);
-        this.longitude = ((coordinate1.getLongitude() + coordinate2.getLongitude()) / 2);
+        this.latitude = ((coordinate1.latitude + coordinate2.latitude) / 2);
+        this.longitude = ((coordinate1.longitude + coordinate2.longitude) / 2);
     }
 }
